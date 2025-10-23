@@ -4,8 +4,8 @@
 // It has the same sandbox as a Chrome extension.
 import os from 'node:os'
 import { contextBridge } from 'electron'
-import vue from 'vue/package.json'
 import pinia from 'pinia/package.json'
+import vue from 'vue/package.json'
 
 window.addEventListener('DOMContentLoaded', () => {
     const replaceText = (selector: string, text: string) => {

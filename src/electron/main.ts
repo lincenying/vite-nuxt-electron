@@ -1,3 +1,4 @@
+import type { ChildProcess } from 'node:child_process'
 import { fork } from 'node:child_process'
 import path from 'node:path'
 import process from 'node:process'
@@ -7,11 +8,9 @@ import { app, BrowserWindow } from 'electron'
 const isDev = process.env.npm_lifecycle_event === 'app:dev'
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 
-console.log(isDev)
-
 const preload = path.join(__dirname, 'preload.js')
 
-let childprocess: any
+let childprocess: ChildProcess
 
 function createWindow() {
     // Create the browser window.
@@ -25,13 +24,18 @@ function createWindow() {
     })
 
     if (!isDev) {
+        process.env.PORT = '3000'
+        process.env.HOST = '127.0.0.1'
         childprocess = fork(path.join(__dirname, '../.output/server/index.mjs'))
         childprocess.on('error', (err: any) => {
             console.log(err)
         })
+        setTimeout(() => {
+            mainWindow.loadURL(`http://${process.env.HOST}:${process.env.PORT}`)
+        }, 1000)
     }
-    mainWindow.loadURL('http://localhost:7123')
     if (isDev) {
+        mainWindow.loadURL(`http://localhost:7123`)
         // Open the DevTools.
         mainWindow.webContents.openDevTools()
     }
@@ -55,7 +59,7 @@ app.whenReady().then(() => {
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
     if (childprocess)
-        process.kill(childprocess.pid)
+        process.kill(childprocess.pid!)
     if (process.platform !== 'darwin')
         app.quit()
 })

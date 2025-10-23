@@ -1,7 +1,6 @@
 import processEnv from 'node:process'
 
 // import { viteCss as vite } from './nuxt.config.vite'
-import { pwa } from './src/config/pwa'
 
 import { appDescription } from './src/constants/index'
 
@@ -15,7 +14,6 @@ export default defineNuxtConfig({
         '@nuxtjs/color-mode',
         '@pinia/nuxt',
         '@unocss/nuxt',
-        '@vite-pwa/nuxt',
         '@vue-macros/nuxt',
         '@vueuse/nuxt',
         '@nuxt/image',
@@ -104,7 +102,7 @@ export default defineNuxtConfig({
         },
     },
 
-    pwa,
+    ssr: false,
 
     devtools: {
         enabled: true,
@@ -153,7 +151,6 @@ export default defineNuxtConfig({
                                     return chunkName
                                 }
                             }
-                            console.log(id)
                         }
                     },
                 },
