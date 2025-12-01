@@ -1,3 +1,14 @@
+ignoreWorkspaceRootCheck: true
+shamefullyHoist: true
+shellEmulator: true
+strictPeerDependencies: false
+registry: https://registry.npmmirror.com
+
+ignoredBuiltDependencies:
+  - sharp
+
 onlyBuiltDependencies:
   - better-sqlite3
   - electron
+  - esbuild
+  - vue-demi
