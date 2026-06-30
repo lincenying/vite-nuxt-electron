@@ -1,3 +1,16 @@
+## 2026-06-30 15:00:00
+
+**改动内容**：将 Electron 应用显示名称改为 Electron模板
+
+- **`src/electron/main.ts`**：新增 `APP_NAME` 常量，调用 `app.setName('Electron模板')` 统一开发/运行时的菜单栏与应用名称
+- **`package.json`**：`build.productName` 设置为 `Electron模板`，用于打包后的应用名称与安装包文件名
+
+**Commit Message**：
+
+```
+feat: 设置 Electron 应用显示名称为 Electron模板
+```
+
 ## 2026-06-30 14:36:03
 
 **改动内容**：汉化 Electron 顶部应用菜单栏

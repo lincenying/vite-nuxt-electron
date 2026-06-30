@@ -72,15 +72,7 @@ export default defineNuxtConfig({
             database: true,
         },
         database: {
-        // 配置SQLite数据库
-            default: {
-                connector: 'sqlite',
-                options: {
-                // 相对项目根目录
-                    path: './.data/db.sqlite',
-                    name: 'db',
-                },
-            },
+            // 配置SQLite数据库
             sqlite3: {
                 connector: 'better-sqlite3',
                 options: {

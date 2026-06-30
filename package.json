@@ -28,6 +28,7 @@
   },
   "build": {
     "appId": "your.app.id",
+    "productName": "Electron模板",
     "asar": false,
     "directories": {
       "buildResources": "assets",
