@@ -5,7 +5,7 @@
             <div class="menu-wrap" flex="~ items-center" ml-64px>
                 <el-dropdown class="menu-item" :class="appConfig.menuActive === 'home' ? 'active' : ''" mr-32px @command="handleCommand">
                     <span class="el-dropdown-link">
-                        <router-link un-text="16px hex-202935" lh-32px to="/">产品展示</router-link>
+                        <NuxtLink un-text="16px hex-202935" lh-32px to="/">产品展示</NuxtLink>
                         <el-icon class="el-icon--right">
                             <ArrowDown />
                         </el-icon>
@@ -17,11 +17,11 @@
                     </template>
                 </el-dropdown>
 
-                <router-link class="menu-item" :class="appConfig.menuActive === 'cases' ? 'active' : ''" relative mr-32px text-16px lh-32px to="/cases">案例展示</router-link>
-                <router-link class="menu-item" :class="appConfig.menuActive === 'news' ? 'active' : ''" mr-32px text-16px lh-32px to="/news">新闻中心</router-link>
-                <router-link class="menu-item" :class="appConfig.menuActive === 'faqs' ? 'active' : ''" mr-32px text-16px lh-32px to="/faqs">常见问题</router-link>
-                <router-link class="menu-item" :class="appConfig.menuActive === 'article' ? 'active' : ''" mr-32px text-16px lh-32px to="/article">SQLite文章</router-link>
-                <router-link class="menu-item" :class="appConfig.menuActive === 'editor' ? 'active' : ''" mr-32px text-16px lh-32px to="/editor">编辑器</router-link>
+                <NuxtLink class="menu-item" :class="appConfig.menuActive === 'cases' ? 'active' : ''" relative mr-32px text-16px lh-32px to="/cases">案例展示</NuxtLink>
+                <NuxtLink class="menu-item" :class="appConfig.menuActive === 'news' ? 'active' : ''" mr-32px text-16px lh-32px to="/news">新闻中心</NuxtLink>
+                <NuxtLink class="menu-item" :class="appConfig.menuActive === 'faqs' ? 'active' : ''" mr-32px text-16px lh-32px to="/faqs">常见问题</NuxtLink>
+                <NuxtLink class="menu-item" :class="appConfig.menuActive === 'article' ? 'active' : ''" mr-32px text-16px lh-32px to="/article">SQLite文章</NuxtLink>
+                <NuxtLink class="menu-item" :class="appConfig.menuActive === 'editor' ? 'active' : ''" mr-32px text-16px lh-32px to="/editor">编辑器</NuxtLink>
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 import type { ApiConfig, Article } from '~/types'
 import { acceptHMRUpdate } from 'pinia'
+import { getArticleDemoList } from '~/api/article'
 
 interface StateType {
     counter: number
@@ -23,7 +24,7 @@ const useIndexStore = defineStore('indexStore', () => {
         state.name = name
     }
     const fetchPost = async (config: ApiConfig = {}) => {
-        const data = await useHttp.$get<Nullable<Article[]>>('/api/article/list', config)
+        const data = await getArticleDemoList(config)
         if (data)
             state.posts = data
 

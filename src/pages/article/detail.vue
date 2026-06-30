@@ -2,7 +2,7 @@
     <div v-loading="loading" class="global-wrap index-wrap">
         <OtherTopBanner title="SQLite文章" intro="这是一段描述文字，可以自定义你想要的文字" :img="topBannerImg"></OtherTopBanner>
         <div ref="navigation" class="navigation" flex="~ justify-center items-center" h-42px bg-hex-fff>
-            <div max-w-1294px flex-auto text-hex-8a8a8a lt-m1360="mx-24px">当前位置：<router-link to="/">首页</router-link> » <router-link to="/article">SQLite文章</router-link> » 文章详情</div>
+            <div max-w-1294px flex-auto text-hex-8a8a8a lt-m1360="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » <NuxtLink to="/article">SQLite文章</NuxtLink> » 文章详情</div>
         </div>
         <div flex="~ justify-center" mt-24px lt-m1360="mx-24px">
             <div flex="~ auto justify-between" max-w-1294px>

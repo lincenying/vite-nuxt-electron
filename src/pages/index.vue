@@ -2,7 +2,7 @@
     <div class="global-wrap index-wrap">
         <OtherTopBanner title="产品展示" intro="这是一段描述文字，可以自定义你想要的文字" :img="topBannerImg"></OtherTopBanner>
         <div ref="navigation" class="navigation" flex="~ justify-center items-center" h-42px bg-hex-fff>
-            <div max-w-1294px flex-auto text-hex-8a8a8a lt-m1360="mx-24px">当前位置：<router-link to="/">首页</router-link> » 产品展示</div>
+            <div max-w-1294px flex-auto text-hex-8a8a8a lt-m1360="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » 产品展示</div>
         </div>
         <div flex="~ justify-center" mt-24px lt-m1360="mx-24px">
             <div flex="~ auto justify-between" max-w-1294px>
@@ -39,26 +39,26 @@
                                     v-for="(item, index) in productLists.list" :key="index"
                                     w="[calc((100%-48px)/3)]" mb-24px bg="hex-fff"
                                 >
-                                    <router-link :to="`/home/detail?id=${item.id}`" pt="2/3" relative block overflow-hidden b-rd-6px>
+                                    <NuxtLink :to="`/home/detail?id=${item.id}`" pt="2/3" relative block overflow-hidden b-rd-6px>
                                         <img
                                             :alt="item.title"
                                             :src="item.imgUrl"
                                             w="full" h="full"
                                             absolute left-0 top-0 object-cover scale="100" transition="all duration-.3s"
                                         >
-                                    </router-link>
+                                    </NuxtLink>
                                     <div p="24px t-16px">
-                                        <router-link to="/">
+                                        <NuxtLink to="/">
                                             <h2 text="15px center" line-2 font-700 lh-22px>{{ item.title }}</h2>
-                                        </router-link>
+                                        </NuxtLink>
                                         <div mt-12px max-h-26px overflow-hidden text-center lh-21px>
-                                            <router-link
+                                            <NuxtLink
                                                 v-for="(sub_item, sub_index) in item.tag" :key="sub_index"
                                                 p="x-8px y-4px" mr-8px inline-block b-rd-4px bg="hex-f3f5f7" un-text="hex-8a8a8a 12px"
                                                 :to="`/?tag=${sub_item}`" rel="tag"
                                             >
                                                 {{ sub_item }}
-                                            </router-link>
+                                            </NuxtLink>
                                         </div>
                                     </div>
                                 </li>

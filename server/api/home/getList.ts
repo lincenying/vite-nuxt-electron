@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
             imgUrl: getRandomValue(imgUrl),
             title: '@ctitle(7, 20)',
             date: '@date("yyyy-MM-dd")',
-            tag: Array.from({ length: 3 }, () => '@cword(3, 5)'),
+            tag: Array.from({ length: 3 }).fill('@cword(3, 5)'),
         })),
         hasPrev: page > 1 ? 1 : 0,
         hasNext: 1,

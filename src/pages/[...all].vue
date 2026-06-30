@@ -5,7 +5,7 @@
         </div>
         <div>Not found</div>
         <div>
-            <button text-14px lh-20px btn m="12px t32px" @click="router.back()">Back</button>
+            <button btn text-14px lh-20px m="12px t32px" @click="router.back()">Back</button>
         </div>
     </main>
 </template>

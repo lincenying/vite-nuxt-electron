@@ -1,13 +1,20 @@
-import processEnv from 'node:process'
+import process from 'node:process'
 
 // import { viteCss as vite } from './nuxt.config.vite'
 
 import { appDescription } from './src/constants/index'
 
-const domain = processEnv.env.NUXT_ENV_HOST_API_URL || 'https://php.mmxiaowu.com'
+const apiHost = process.env.NUXT_API_HOST || 'https://php.mmxiaowu.com'
 
 export default defineNuxtConfig({
     srcDir: 'src',
+
+    runtimeConfig: {
+        apiHost,
+        public: {
+            apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
+        },
+    },
 
     modules: [
         '@element-plus/nuxt',
@@ -49,7 +56,7 @@ export default defineNuxtConfig({
         },
         routeRules: {
             '/php/**': {
-                proxy: `${domain}/api/fetch/**`,
+                proxy: `${apiHost}/api/fetch/**`,
             },
         },
         // 开启本地文件K/V存储
@@ -192,7 +199,7 @@ export default defineNuxtConfig({
             },
             {
                 entry: 'src/electron/preload.ts',
-                onstart(options: any) {
+                onstart(options: { reload: () => void }) {
                     // Notify the renderer process to reload the page when the preload-script is completely loaded
                     // Instead of restarting the entire electron app
                     options.reload()

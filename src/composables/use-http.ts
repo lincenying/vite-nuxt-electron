@@ -1,5 +1,7 @@
 import type { SearchParameters } from 'ofetch'
+import type { WatchSource } from 'vue'
 
+import type { ApiResponse } from '#shared/types'
 import { isFormData } from '@lincy/utils'
 import { appendResponseHeader } from 'h3'
 import md5 from 'md5'
@@ -10,7 +12,7 @@ export interface RequestOptions {
     /** 唯一键，保证跨请求去重 */
     key?: string
     /** 请求方法 */
-    method?: any
+    method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS'
     /** 向 URL 添加查询参数 */
     query?: SearchParameters
     /** 请求体 - 如果传入对象，会自动序列化 */
@@ -28,11 +30,11 @@ export interface RequestOptions {
     /** 是否立即执行请求, 如果为 true，则立即执行请求，否则在组件挂载后执行, 如果为 false，则在组件挂载后执行, 默认为 true） */
     immediate?: boolean
     /** 工厂函数，用于在异步函数返回前设置 data 的默认值，适用于 lazy: true 或 immediate: false */
-    default?: () => any
+    default?: () => unknown
     /** 用于在解析后修改 handler 函数结果的函数 */
-    transform?: (input: any) => any | Promise<any>
+    transform?: (input: unknown) => unknown | Promise<unknown>
     /** 观察响应式源数组，在变化时自动刷新 fetch 结果。默认观察 fetch 选项和 URL。可以使用 watch: false 完全忽略响应式源。和 immediate: false 配合可以实现完全手动触发 useFetch。 */
-    watch?: any[] | false
+    watch?: WatchSource[] | false
     /** 返回深度响应式的 ref（默认 true）。可设为 false 以返回浅层响应式的 ref，在数据无需深度响应时提升性能。 */
     deep?: boolean
 }
@@ -44,6 +46,7 @@ async function _useFetch<T>(url: UrlType, params?: SearchParameters, options?: R
     const body = options?.body || {}
     return useFetch<T>(url as string, {
         key: options?.key ?? md5(url as string),
+        // @ts-expect-error useFetch method 类型与自定义封装不完全兼容
         method,
         params,
         query: options?.query,
@@ -58,9 +61,12 @@ async function _useFetch<T>(url: UrlType, params?: SearchParameters, options?: R
         server: options?.server,
         lazy: options?.lazy,
         immediate: options?.immediate,
+        // @ts-expect-error useFetch default 类型与自定义封装不完全兼容
         default: options?.default,
+        // @ts-expect-error useFetch transform 类型与自定义封装不完全兼容
         transform: options?.transform,
         credentials: 'include',
+        // @ts-expect-error useFetch watch 类型与自定义封装不完全兼容
         watch: options?.watch,
         deep: options?.deep,
         onRequest() {
@@ -82,12 +88,14 @@ async function _useFetch<T>(url: UrlType, params?: SearchParameters, options?: R
                 }
             }
             // Process the response data
-            const tmpData = response._data as any
+            const tmpData = response._data as ApiResponse<T>
             if (tmpData.code !== 200) {
                 if (import.meta.client)
                     ElMessage.error(tmpData.message)
+                // @ts-expect-error 统一解包 ApiResponse 后写回 data
                 return response._data = undefined
             }
+            // @ts-expect-error 统一解包 ApiResponse 后写回 data
             return response._data = tmpData.data || 'success'
         },
         onResponseError({ request }) {
@@ -132,11 +140,14 @@ async function _fetch<T>(url: UrlType, params?: SearchParameters, options?: Requ
                 }
             }
             // Process the response data
-            if (response._data.code !== 200) {
-                ElMessage.error(response._data.message)
+            const tmpData = response._data as ApiResponse<T>
+            if (tmpData.code !== 200) {
+                ElMessage.error(tmpData.message)
+                // @ts-expect-error 统一解包 ApiResponse 后写回 data
                 return response._data = null
             }
-            return response._data = response._data.data || 'success'
+            // @ts-expect-error 统一解包 ApiResponse 后写回 data
+            return response._data = tmpData.data || 'success'
         },
         onResponseError({ request }) {
             console.log('🚀 ~ onResponseError ~ request:', request)
@@ -174,17 +185,6 @@ function createInstance(initOption?: RequestOptions) {
          * @param params 请求参数
          * @param option 包含 method, headers, key, body 参数
          * @returns T
-         * @description
-         * ```
-         *    type AsyncData<DataT, ErrorT> = {
-         *      data: Ref<DataT | null>
-         *      pending: Ref<boolean>
-         *      refresh: (opts?: AsyncDataExecuteOptions) => Promise<void>
-         *      execute: (opts?: AsyncDataExecuteOptions) => Promise<void>
-         *      error: Ref<ErrorT | null>
-         *      status: Ref<AsyncDataRequestStatus>
-         *    }
-         * ```
          */
         get: <T>(url: UrlType, params?: SearchParameters, option?: RequestOptions) => {
             return _useFetch<T>(url, params, { method: 'GET', ...initOption, ...option })
@@ -195,17 +195,6 @@ function createInstance(initOption?: RequestOptions) {
          * @param params 请求参数
          * @param option 包含 method, headers, key, body 参数
          * @returns useFetch
-         * @description
-         * ```
-         *  type AsyncData<DataT, ErrorT> = {
-         *      data: Ref<DataT | null>
-         *      pending: Ref<boolean>
-         *      refresh: (opts?: AsyncDataExecuteOptions) => Promise<void>
-         *      execute: (opts?: AsyncDataExecuteOptions) => Promise<void>
-         *      error: Ref<ErrorT | null>
-         *      status: Ref<AsyncDataRequestStatus>
-         *  }
-         * ```
          */
         post: <T>(url: UrlType, params?: SearchParameters, option?: RequestOptions) => {
             return _useFetch<T>(url, params, { method: 'POST', ...initOption, ...option })

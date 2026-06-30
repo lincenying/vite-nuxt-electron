@@ -1,35 +1,4 @@
 ignoreWorkspaceRootCheck: true
-shamefullyHoist: true
-shellEmulator: true
-
-trustPolicy: no-downgrade
-
-trustPolicyExclude:
-  - undici-types
-  - semver
-
-strictPeerDependencies: false
-registry: https://registry.npmmirror.com
-
-ignoredBuiltDependencies:
-  - sharp
-
-onlyBuiltDependencies:
-  - better-sqlite3
-  - electron
-  - esbuild
-  - vue-demi
-
-allowBuilds:
-  '@parcel/watcher': true
-  better-sqlite3: true
-  electron: true
-  electron-winstaller: true
-  esbuild: true
-  phantomjs-prebuilt: true
-  sharp: true
-  vue-demi: true
-
 minimumReleaseAgeExclude:
   - '@typescript-eslint/parser@8.62.1'
   - '@typescript-eslint/project-service@8.62.1'
@@ -66,3 +35,33 @@ minimumReleaseAgeExclude:
   - '@unocss/webpack@66.7.4'
   - unocss@66.7.4
   - electron@42.5.1
+shamefullyHoist: true
+shellEmulator: true
+
+trustPolicy: no-downgrade
+
+trustPolicyExclude:
+  - undici-types
+  - semver
+
+strictPeerDependencies: false
+registry: https://registry.npmmirror.com
+
+ignoredBuiltDependencies:
+  - sharp
+
+onlyBuiltDependencies:
+  - better-sqlite3
+  - electron
+  - esbuild
+  - vue-demi
+
+allowBuilds:
+  '@parcel/watcher': true
+  better-sqlite3: true
+  electron: true
+  electron-winstaller: true
+  esbuild: true
+  phantomjs-prebuilt: true
+  sharp: true
+  vue-demi: true

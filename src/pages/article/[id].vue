@@ -14,13 +14,14 @@
 </template>
 
 <script setup lang="ts">
+import type { ListsData } from '~/types'
+import { getArticleDemoDetail } from '~/api/article'
 import { appName } from '~/constants'
-import type { Article, ListsData } from '~/types'
 
 const router = useRouter()
 const id = useRouteParam('id')
 
-const { data, pending } = await useHttp.get<Article>(`/api/article/detail`, { id }, { key: `article-detail-${id.value}` })
+const { data, pending } = await getArticleDemoDetail(id, { key: `article-detail-${id.value}` })
 
 const isLoading = useDelay(pending, 100)
 

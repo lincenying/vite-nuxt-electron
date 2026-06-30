@@ -21,8 +21,9 @@
 </template>
 
 <script setup lang="ts">
-import { appName } from '~/constants'
 import type { Article, ListsData } from '~/types'
+import { getArticleDemoDetail, getArticleDemoLists } from '~/api/article'
+import { appName } from '~/constants'
 
 const router = useRouter()
 
@@ -35,7 +36,7 @@ const lists = ref<Article[]>([])
 const page = ref(1)
 let hasNext = $ref(false)
 
-const { data: posts, pending } = await useHttp.get<ListsData>('/api/article/lists', { page, limit: 15 }, { key: `article-lists` })
+const { data: posts, pending } = await getArticleDemoLists(page)
 
 const isLoading = useDelay(pending, 300)
 

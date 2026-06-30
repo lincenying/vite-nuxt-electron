@@ -21,6 +21,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:ts": "vue-tsc --noEmit",
+    "typecheck": "nuxt typecheck",
     "lint:css": "stylelint '**/*.{css,scss}' --fix",
     "pack": "electron-builder",
     "electron:generate-icons": "electron-icon-builder --input=./public/favicon.png --output=build --flatten"
