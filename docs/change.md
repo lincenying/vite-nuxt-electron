@@ -1,3 +1,28 @@
+## 2026-06-30 14:31:28
+
+**改动内容**：修复 Electron 导航 API 弃用警告
+
+- **`src/electron/context-menu.ts`**：`canGoBack`/`goBack`/`canGoForward`/`goForward` 迁移至 `webContents.navigationHistory`
+
+**Commit Message**：
+
+```
+fix: 迁移至 navigationHistory 导航 API
+```
+
+## 2026-06-30 14:29:11
+
+**改动内容**：为 Electron 窗口添加右键上下文菜单
+
+- **新建 `src/electron/context-menu.ts`**：实现 `setupContextMenu`，包含返回、前进、刷新、强制刷新、剪切/复制/粘贴/全选；开发模式下额外提供检查元素与开发者工具
+- **`src/electron/main.ts`**：窗口创建后调用 `setupContextMenu`
+
+**Commit Message**：
+
+```
+feat: 为 Electron 添加右键上下文菜单
+```
+
 ## 2026-06-30 14:22:26
 
 **改动内容**：修复 Vue Router 导航守卫 `next()` 弃用警告

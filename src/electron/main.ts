@@ -3,6 +3,7 @@ import { fork } from 'node:child_process'
 import path from 'node:path'
 import process from 'node:process'
 import { app, BrowserWindow } from 'electron'
+import { setupContextMenu } from './context-menu'
 
 const devServerUrl = process.env.VITE_DEV_SERVER_URL
 const isDev = !!devServerUrl
@@ -38,6 +39,8 @@ function createWindow() {
         mainWindow.loadURL(devServerUrl)
         mainWindow.webContents.openDevTools()
     }
+
+    setupContextMenu(mainWindow, isDev)
 }
 
 // This method will be called when Electron has finished

@@ -28,7 +28,6 @@ dist-electron
 *.njsproj
 *.sln
 *.sw?
-pnpm-lock.yaml
 .env.production
 .env
 .cursor/rules/global*.mdc
