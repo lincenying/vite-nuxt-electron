@@ -22,10 +22,10 @@ defineOptions({
     name: 'NewsRecommend',
 })
 
-let newsRec = $ref<NewsType[]>()
+const newsRec = ref<NewsType[]>([])
 
 const { data } = await getFaqsRecommend()
 if (data.value) {
-    newsRec = data.value
+    newsRec.value = data.value
 }
 </script>

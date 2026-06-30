@@ -1,3 +1,24 @@
+## 2026-06-30 14:10:32
+
+**改动内容**：修复剩余 TypeScript 类型报错，完成类型体系收尾
+
+- **`use-http.ts`**：移除错误的 `async` 包装；新增 `HttpAsyncData<T>` 显式返回类型；修复 `onResponse` 回调参数类型；提取 `unwrapApiResponse` 工具函数
+- **`src/types/http.types.ts`**：定义 `HttpAsyncData<T>` 统一 useFetch 封装返回类型
+- **`src/api/*`**：所有 `get` 类 API 函数补充 `HttpAsyncData<T>` 返回类型注解
+- **`composables/nuxt.ts`**：修复 `route.params` 动态索引类型
+- **`composables/scroll.ts`**：导出 `ScrollbarInstance` 类型别名
+- **`composables/delay.ts` 调用方**：`lists.vue`、`article/[id].vue` 改用 `status` 替代 `pending`
+- **推荐组件**：`$ref` 改为 `ref`，修复 ReactiveVariable 赋值类型错误
+- **演示页面**：修复 `Article`/`ListsData` 类型引用、`ScrollbarInstance` 导入
+
+**验证结果**：`pnpm lint:ts` ✅ | `pnpm typecheck` ✅ | `pnpm lint` ✅（0 errors）
+
+**Commit Message**：
+
+```
+fix: 修复 HTTP 封装与 API 层 TypeScript 类型推断问题
+```
+
 ## 2026-06-30 13:55:39
 
 **改动内容**：根据 Nuxt 4 开发规范全面优化项目结构与代码质量

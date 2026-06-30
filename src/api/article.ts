@@ -2,6 +2,7 @@ import type { Ref } from 'vue'
 import type { ListPayload } from '#shared/types'
 import type { ApiConfig, Article, ListsData } from '~/types'
 import type { ArticleType } from '~/types/article.types'
+import type { HttpAsyncData } from '~/types/http.types'
 import type { ArticleState } from '~/types/pinia.types'
 
 /** 获取 SQLite 文章列表 */
@@ -15,7 +16,7 @@ export function getArticleDetail(id: string) {
 }
 
 /** 获取文章推荐 */
-export function getArticleRecommend() {
+export function getArticleRecommend(): HttpAsyncData<ArticleType[]> {
     return useHttp.get<ArticleType[]>('/api/sqlite3/article/relatedRecom', {})
 }
 
@@ -25,12 +26,12 @@ export function getArticleDemoList(config: ApiConfig = {}) {
 }
 
 /** 获取示例文章分页列表 */
-export function getArticleDemoLists(page: Ref<number>, limit = 15) {
+export function getArticleDemoLists(page: Ref<number>, limit = 15): HttpAsyncData<ListsData> {
     return useHttp.get<ListsData>('/api/article/lists', { page, limit }, { key: 'article-lists' })
 }
 
 /** 获取示例文章详情 */
-export function getArticleDemoDetail(id: Ref<string> | string, options?: { key?: string }) {
+export function getArticleDemoDetail(id: Ref<string> | string, options?: { key?: string }): HttpAsyncData<Article> {
     return useHttp.get<Article>('/api/article/detail', { id }, { key: options?.key })
 }
 

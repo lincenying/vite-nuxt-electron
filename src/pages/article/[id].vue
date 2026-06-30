@@ -14,35 +14,37 @@
 </template>
 
 <script setup lang="ts">
-import type { ListsData } from '~/types'
+import type { Article, ListsData } from '~/types'
 import { getArticleDemoDetail } from '~/api/article'
 import { appName } from '~/constants'
 
 const router = useRouter()
 const id = useRouteParam('id')
 
-const { data, pending } = await getArticleDemoDetail(id, { key: `article-detail-${id.value}` })
+const { data, status } = await getArticleDemoDetail(id, { key: `article-detail-${id.value}` })
 
-const isLoading = useDelay(pending, 100)
+const isLoading = useDelay(status, 100)
 
-const detail = computed(() => data.value)
+const detail = computed<Article | null>(() => data.value)
 
 // 更新列表数据 ===>
 const { data: posts } = useNuxtData<ListsData>('article-lists')
-console.log('🚀 ~ file: [id].vue:35 ~ posts:', posts)
 
 const list = posts.value?.list || []
 const index = list.findIndex(item => item.c_id === Number(id.value))
 if (index > -1) {
-    list.splice(index, 1, {
-        ...list[index],
-        c_title: `${list[index].c_title} [clicked]`,
-    })
+    const current = list[index]
+    if (current) {
+        list.splice(index, 1, {
+            ...current,
+            c_title: `${current.c_title} [clicked]`,
+        })
+    }
 }
 // 更新列表数据 <===
 
 useHead({
-    title: `${detail.value?.c_title} - ${appName}`,
+    title: `${detail.value?.c_title ?? 'Article'} - ${appName}`,
 })
 
 definePageMeta({

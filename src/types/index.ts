@@ -4,6 +4,7 @@ export type { CommentType, CommentTypeEnum } from './comments.types'
 export type { FaqsType } from './faqs.types'
 export type { ApiConfig, ListType, LoadedType, RefOrComputedRef } from './global.types'
 export type { ProductsType } from './home.types'
+export type { HttpAsyncData } from './http.types'
 export type { NewsType } from './news.types'
 
 /** 演示文章类型 */

@@ -27,10 +27,10 @@ defineOptions({
     name: 'ProductRecommend',
 })
 
-let productRec = $ref<ProductsType[]>([])
+const productRec = ref<ProductsType[]>([])
 
 const { data } = await getHomeRecommend()
 if (data.value) {
-    productRec = data.value || []
+    productRec.value = data.value
 }
 </script>

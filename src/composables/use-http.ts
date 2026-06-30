@@ -1,7 +1,8 @@
-import type { SearchParameters } from 'ofetch'
-import type { WatchSource } from 'vue'
+import type { FetchContext, FetchResponse, SearchParameters } from 'ofetch'
+import type { MultiWatchSources, WatchSource } from 'vue'
 
 import type { ApiResponse } from '#shared/types'
+import type { HttpAsyncData } from '~/types/http.types'
 import { isFormData } from '@lincy/utils'
 import { appendResponseHeader } from 'h3'
 import md5 from 'md5'
@@ -27,26 +28,36 @@ export interface RequestOptions {
     server?: boolean
     /** 是否延迟在路由加载后解析异步函数，避免阻塞客户端导航（默认为 false） */
     lazy?: boolean
-    /** 是否立即执行请求, 如果为 true，则立即执行请求，否则在组件挂载后执行, 如果为 false，则在组件挂载后执行, 默认为 true） */
+    /** 是否立即执行请求 */
     immediate?: boolean
-    /** 工厂函数，用于在异步函数返回前设置 data 的默认值，适用于 lazy: true 或 immediate: false */
+    /** 工厂函数，用于在异步函数返回前设置 data 的默认值 */
     default?: () => unknown
     /** 用于在解析后修改 handler 函数结果的函数 */
     transform?: (input: unknown) => unknown | Promise<unknown>
-    /** 观察响应式源数组，在变化时自动刷新 fetch 结果。默认观察 fetch 选项和 URL。可以使用 watch: false 完全忽略响应式源。和 immediate: false 配合可以实现完全手动触发 useFetch。 */
+    /** 观察响应式源数组，在变化时自动刷新 fetch 结果 */
     watch?: WatchSource[] | false
-    /** 返回深度响应式的 ref（默认 true）。可设为 false 以返回浅层响应式的 ref，在数据无需深度响应时提升性能。 */
+    /** 返回深度响应式的 ref（默认 true） */
     deep?: boolean
 }
 
-async function _useFetch<T>(url: UrlType, params?: SearchParameters, options?: RequestOptions) {
+/** 解包 ApiResponse 并写回 response._data */
+function unwrapApiResponse<T>(response: { _data?: unknown }, data: ApiResponse<T>): void {
+    if (data.code !== 200) {
+        if (import.meta.client)
+            ElMessage.error(data.message)
+        response._data = undefined
+        return
+    }
+    response._data = data.data ?? 'success'
+}
+
+function _useFetch<T>(url: UrlType, params?: SearchParameters, options?: RequestOptions): HttpAsyncData<T> {
     const H3Event = useRequestEvent()
     const headers = useRequestHeaders(['cookie'])
     const method = options?.method ?? 'GET'
     const body = options?.body || {}
     return useFetch<T>(url as string, {
         key: options?.key ?? md5(url as string),
-        // @ts-expect-error useFetch method 类型与自定义封装不完全兼容
         method,
         params,
         query: options?.query,
@@ -61,51 +72,35 @@ async function _useFetch<T>(url: UrlType, params?: SearchParameters, options?: R
         server: options?.server,
         lazy: options?.lazy,
         immediate: options?.immediate,
-        // @ts-expect-error useFetch default 类型与自定义封装不完全兼容
         default: options?.default,
-        // @ts-expect-error useFetch transform 类型与自定义封装不完全兼容
         transform: options?.transform,
         credentials: 'include',
-        // @ts-expect-error useFetch watch 类型与自定义封装不完全兼容
-        watch: options?.watch,
+        watch: options?.watch as false | MultiWatchSources | undefined,
         deep: options?.deep,
         onRequest() {
-            // Set the request headers
-            // options.headers = options.headers || {};
         },
-        onRequestError({ error }) {
+        onRequestError({ error }: FetchContext) {
             if (import.meta.client) {
                 ElMessage.closeAll()
                 error && ElMessage.error('Sorry, The Data Request Failed')
             }
-            // Handle the request errors
         },
-        onResponse({ response }) {
+        onResponse({ response }: FetchContext & { response: FetchResponse<T> }) {
             const cookies = response.headers.getSetCookie()
             if (H3Event && cookies && cookies.length > 0) {
                 for (const cookie of cookies) {
                     appendResponseHeader(H3Event, 'set-cookie', normalizeCookiePath(cookie))
                 }
             }
-            // Process the response data
-            const tmpData = response._data as ApiResponse<T>
-            if (tmpData.code !== 200) {
-                if (import.meta.client)
-                    ElMessage.error(tmpData.message)
-                // @ts-expect-error 统一解包 ApiResponse 后写回 data
-                return response._data = undefined
-            }
-            // @ts-expect-error 统一解包 ApiResponse 后写回 data
-            return response._data = tmpData.data || 'success'
+            unwrapApiResponse<T>(response, response._data as ApiResponse<T>)
         },
-        onResponseError({ request }) {
+        onResponseError({ request }: FetchContext) {
             console.log('🚀 ~ onResponseError ~ request:', request)
-            // Handle the response errors
         },
-    })
+    } as unknown as Parameters<typeof useFetch<T>>[1]) as HttpAsyncData<T>
 }
 
-async function _fetch<T>(url: UrlType, params?: SearchParameters, options?: RequestOptions) {
+function _fetch<T>(url: UrlType, params?: SearchParameters, options?: RequestOptions): Promise<T | null> {
     const H3Event = useRequestEvent()
     const headers = useRequestHeaders(['cookie'])
     const method = options?.method ?? 'GET'
@@ -124,79 +119,44 @@ async function _fetch<T>(url: UrlType, params?: SearchParameters, options?: Requ
         timeout: options?.timeout ?? 5000,
         credentials: 'include',
         onRequest() {
-            // Set the request headers
-            // options.headers = options.headers || {};
         },
-        onRequestError({ error }) {
+        onRequestError({ error }: FetchContext) {
             ElMessage.closeAll()
             error && ElMessage.error('Sorry, The Data Request Failed')
-            // Handle the request errors
         },
-        onResponse({ response }) {
+        onResponse({ response }: FetchContext & { response: FetchResponse<T> }) {
             const cookies = response.headers.getSetCookie()
             if (H3Event && cookies && cookies.length > 0) {
                 for (const cookie of cookies) {
                     appendResponseHeader(H3Event, 'set-cookie', normalizeCookiePath(cookie))
                 }
             }
-            // Process the response data
             const tmpData = response._data as ApiResponse<T>
             if (tmpData.code !== 200) {
                 ElMessage.error(tmpData.message)
-                // @ts-expect-error 统一解包 ApiResponse 后写回 data
-                return response._data = null
+                response._data = null
+                return
             }
-            // @ts-expect-error 统一解包 ApiResponse 后写回 data
-            return response._data = tmpData.data || 'success'
+            response._data = tmpData.data ?? 'success'
         },
-        onResponseError({ request }) {
+        onResponseError({ request }: FetchContext) {
             console.log('🚀 ~ onResponseError ~ request:', request)
-            // Handle the response errors
         },
-    })
+    }) as Promise<T | null>
 }
 
 function createInstance(initOption?: RequestOptions) {
     return {
-    /**
-     * $fetch.GET 封装
-     * @param url api地址
-     * @param params 请求参数
-     * @param option 包含 method, headers, body 参数
-     * @returns T
-     */
         $get: <T>(url: string, params?: SearchParameters, option?: RequestOptions) => {
             return _fetch<T>(url, params, { method: 'GET', ...initOption, ...option })
         },
-        /**
-         * $fetch.POST 封装
-         * @param url api地址
-         * @param params 请求参数
-         * @param option 包含 method, headers, body 参数
-         * @returns T
-         */
         $post: <T>(url: string, params?: SearchParameters, option?: RequestOptions) => {
             return _fetch<T>(url, params, { method: 'POST', ...initOption, ...option })
         },
-
-        /**
-         * useFetch.GET 封装
-         * @param url api地址
-         * @param params 请求参数
-         * @param option 包含 method, headers, key, body 参数
-         * @returns T
-         */
-        get: <T>(url: UrlType, params?: SearchParameters, option?: RequestOptions) => {
+        get: <T>(url: UrlType, params?: SearchParameters, option?: RequestOptions): HttpAsyncData<T> => {
             return _useFetch<T>(url, params, { method: 'GET', ...initOption, ...option })
         },
-        /**
-         * useFetch.POST 封装
-         * @param url api地址
-         * @param params 请求参数
-         * @param option 包含 method, headers, key, body 参数
-         * @returns useFetch
-         */
-        post: <T>(url: UrlType, params?: SearchParameters, option?: RequestOptions) => {
+        post: <T>(url: UrlType, params?: SearchParameters, option?: RequestOptions): HttpAsyncData<T> => {
             return _useFetch<T>(url, params, { method: 'POST', ...initOption, ...option })
         },
     }

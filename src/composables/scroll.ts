@@ -1,5 +1,7 @@
 import type { ElScrollbarType } from '~/types/global.types'
 
+export type ScrollbarInstance = ElScrollbarType
+
 /**
  * 基于Elment-Plus滚动条组件的自动记录/恢复滚动条位置
  * @param refKey 组件ref名称

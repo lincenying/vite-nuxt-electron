@@ -1,6 +1,5 @@
 import type { ListPayload } from '#shared/types'
 import type { ArticleState } from '../types/pinia.types'
-import type { ArticleType } from '~/types/article.types'
 import { isEmpty } from '@lincy/utils'
 import { acceptHMRUpdate } from 'pinia'
 import { getArticleDetail, getArticleList } from '~/api/article'

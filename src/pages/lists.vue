@@ -21,8 +21,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Article, ListsData } from '~/types'
-import { getArticleDemoDetail, getArticleDemoLists } from '~/api/article'
+import type { Article } from '~/types'
+import type { ElScrollbarType } from '~/types/global.types'
+import { getArticleDemoLists } from '~/api/article'
 import { appName } from '~/constants'
 
 const router = useRouter()
@@ -36,9 +37,9 @@ const lists = ref<Article[]>([])
 const page = ref(1)
 let hasNext = $ref(false)
 
-const { data: posts, pending } = await getArticleDemoLists(page)
+const { data: posts, status } = await getArticleDemoLists(page)
 
-const isLoading = useDelay(pending, 300)
+const isLoading = useDelay(status, 300)
 
 watch(() => posts.value, (newData) => {
     if (newData) {
@@ -50,7 +51,7 @@ watch(() => posts.value, (newData) => {
 })
 
 // 记录和还原滚动条位置
-const listsScrollBar = ref<ScrollbarInstance>()
+const listsScrollBar = ref<ElScrollbarType>()
 const { onScroll } = useAutoScroll('listsScrollBar')
 
 setTimeout(() => {

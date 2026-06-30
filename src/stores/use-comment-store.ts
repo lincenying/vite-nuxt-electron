@@ -1,5 +1,4 @@
 import type { CommentListPayload } from '#shared/types'
-import type { CommentType } from '~/types/comments.types'
 import type { CommentState } from '~/types/pinia.types'
 import { acceptHMRUpdate } from 'pinia'
 

@@ -1,5 +1,6 @@
 import type { ListPayload } from '#shared/types'
 import type { CasesType } from '~/types/cases.types'
+import type { HttpAsyncData } from '~/types/http.types'
 import type { NewsType } from '~/types/news.types'
 import type { CasesState } from '~/types/pinia.types'
 
@@ -14,11 +15,11 @@ export function getCasesDetail(id: string) {
 }
 
 /** 获取案例推荐 */
-export function getCasesRecommend() {
+export function getCasesRecommend(): HttpAsyncData<CasesType[]> {
     return useHttp.get<CasesType[]>('/api/cases/getRecommend', {})
 }
 
 /** 获取案例相关推荐 */
-export function getCasesRelatedRecom(params: Record<string, string | number>) {
+export function getCasesRelatedRecom(params: Record<string, string | number>): HttpAsyncData<CasesType[]> {
     return useHttp.get<CasesType[]>('/api/cases/relatedRecom', params)
 }
