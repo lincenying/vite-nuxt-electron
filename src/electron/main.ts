@@ -3,6 +3,7 @@ import { fork } from 'node:child_process'
 import path from 'node:path'
 import process from 'node:process'
 import { app, BrowserWindow } from 'electron'
+import { setupAppMenu } from './app-menu'
 import { setupContextMenu } from './context-menu'
 
 const devServerUrl = process.env.VITE_DEV_SERVER_URL
@@ -25,7 +26,7 @@ function createWindow() {
     })
 
     if (!isDev) {
-        process.env.PORT = '3000'
+        process.env.PORT = '28256'
         process.env.HOST = '127.0.0.1'
         childprocess = fork(path.join(__dirname, '../.output/server/index.mjs'))
         childprocess.on('error', (err: any) => {
@@ -37,7 +38,6 @@ function createWindow() {
     }
     if (isDev && devServerUrl) {
         mainWindow.loadURL(devServerUrl)
-        mainWindow.webContents.openDevTools()
     }
 
     setupContextMenu(mainWindow, isDev)
@@ -47,6 +47,7 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+    setupAppMenu(isDev)
     createWindow()
     app.on('activate', () => {
         // On macOS it's common to re-create a window in the app when the

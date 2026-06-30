@@ -1,3 +1,16 @@
+## 2026-06-30 14:36:03
+
+**改动内容**：汉化 Electron 顶部应用菜单栏
+
+- **新建 `src/electron/app-menu.ts`**：通过 `Menu.setApplicationMenu` 设置中文菜单（文件、编辑、视图、窗口），macOS 额外包含应用菜单
+- **`src/electron/main.ts`**：应用就绪时调用 `setupAppMenu`
+
+**Commit Message**：
+
+```
+feat: 汉化 Electron 顶部应用菜单
+```
+
 ## 2026-06-30 14:31:28
 
 **改动内容**：修复 Electron 导航 API 弃用警告
