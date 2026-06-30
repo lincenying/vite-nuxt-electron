@@ -15,7 +15,7 @@
     "nuxt:build": "nuxt build",
     "nuxt:generate": "nuxt generate",
     "nuxt:preview": "nuxt preview",
-    "app:dev": "tsc && concurrently \"nuxt dev\" \" electron .\" \"tsc -w\"",
+    "app:dev": "nuxt dev",
     "app:build": "pnpm nuxt:build && tsc && electron-builder",
     "app:preview": "pnpm nuxt:build && tsc && electron .",
     "lint": "eslint .",

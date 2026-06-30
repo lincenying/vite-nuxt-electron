@@ -4,8 +4,8 @@ import path from 'node:path'
 import process from 'node:process'
 import { app, BrowserWindow } from 'electron'
 
-// const isApp = process.env.NODE_ENV !== 'development'
-const isDev = process.env.npm_lifecycle_event === 'app:dev'
+const devServerUrl = process.env.VITE_DEV_SERVER_URL
+const isDev = !!devServerUrl
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 
 const preload = path.join(__dirname, 'preload.js')
@@ -34,9 +34,8 @@ function createWindow() {
             mainWindow.loadURL(`http://${process.env.HOST}:${process.env.PORT}`)
         }, 1000)
     }
-    if (isDev) {
-        mainWindow.loadURL(`http://localhost:7123`)
-        // Open the DevTools.
+    if (isDev && devServerUrl) {
+        mainWindow.loadURL(devServerUrl)
         mainWindow.webContents.openDevTools()
     }
 }

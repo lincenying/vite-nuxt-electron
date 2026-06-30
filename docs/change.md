@@ -1,3 +1,28 @@
+## 2026-06-30 14:22:26
+
+**改动内容**：修复 Vue Router 导航守卫 `next()` 弃用警告
+
+- **`src/composables/index.ts`**：`useSaveScroll` 中 `onBeforeRouteLeave` 移除 `next` 回调，改为直接返回（允许导航）
+
+**Commit Message**：
+
+```
+fix: 修复路由守卫 next() 弃用警告
+```
+
+## 2026-06-30 14:20:20
+
+**改动内容**：修复 `pnpm run serve` 启动时出现两个 Electron 窗口和两个 DevTools 的问题
+
+- **`package.json`**：`app:dev` 移除重复的 `electron .` 与冗余的 `tsc`/`tsc -w`，仅保留 `nuxt dev`（由 `nuxt-electron` 自动启动 Electron）
+- **`src/electron/main.ts`**：开发模式判断改为使用 `VITE_DEV_SERVER_URL`（`nuxt-electron` 注入），替代 `npm_lifecycle_event`
+
+**Commit Message**：
+
+```
+fix: 修复开发模式重复启动 Electron 窗口问题
+```
+
 ## 2026-06-30 14:10:32
 
 **改动内容**：修复剩余 TypeScript 类型报错，完成类型体系收尾
