@@ -31,3 +31,5 @@ dist-electron
 pnpm-lock.yaml
 .env.production
 .env
+.cursor/rules/global*.mdc
+.qoder/rules/global*.mdc

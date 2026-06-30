@@ -4,5 +4,10 @@ export default lincy(
     {
         unocss: true,
         formatters: true,
+        overrides: {
+            yaml: {
+                'pnpm/yaml-enforce-settings': 'off',
+            },
+        },
     },
 )

@@ -144,7 +144,7 @@ export default defineNuxtConfig({
                         if (id.includes('__uno.css')) {
                             return 'unocss'
                         }
-                        const chunks = ['element-plus', 'md-editor-v3', 'markdown-it', 'vue-pdf']
+                        const chunks = ['element-plus', 'md-editor-v3', 'markdown-it']
                         if (id.includes('/node_modules/')) {
                             for (const chunkName of chunks) {
                                 if (id.includes(chunkName)) {
@@ -160,7 +160,6 @@ export default defineNuxtConfig({
             include: [
                 '@element-plus/icons-vue',
                 '@lincy/async-validation',
-                '@tato30/vue-pdf',
                 'mitt',
                 'store2',
             ],
