@@ -218,4 +218,10 @@ export default defineNuxtConfig({
         : {}),
 
     compatibilityDate: '2025-07-05',
+
+    typescript: {
+        nodeTsConfig: {
+            include: ['../*.ts'],
+        },
+    },
 })

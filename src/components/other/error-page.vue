@@ -6,11 +6,11 @@
             :img="topBannerImg"
         />
         <div class="navigation" flex="~ justify-center items-center" h-42px bg-hex-fff>
-            <div max-w-1294px flex-auto text-hex-8a8a8a lt-m1360="mx-24px">
+            <div max-w-1294px flex-auto text-hex-8a8a8a lt-s1366="mx-24px">
                 当前位置：<NuxtLink to="/">首页</NuxtLink> » {{ pageInfo.breadcrumb }}
             </div>
         </div>
-        <div flex="~ justify-center" mt-24px pb-80px lt-m1360="mx-24px">
+        <div flex="~ justify-center" mt-24px pb-80px lt-s1366="mx-24px">
             <div
                 class="error-panel"
                 max-w-1294px w-full b-rd-6px bg-hex-fff p="y-72px x-40px" text-center

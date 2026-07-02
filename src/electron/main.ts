@@ -33,6 +33,8 @@ function createWindow() {
         },
     })
 
+    mainWindow.setMinimumSize(1280, 880)
+
     if (!isDev) {
         process.env.PORT = '28256'
         process.env.HOST = '127.0.0.1'

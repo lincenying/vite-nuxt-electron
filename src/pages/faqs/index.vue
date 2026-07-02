@@ -2,11 +2,11 @@
     <div v-loading="loading" class="global-wrap faqs-wrap">
         <OtherTopBanner title="常见问题" intro="这是一段描述文字，可以自定义你想要的文字" :img="topBannerImg"></OtherTopBanner>
         <div ref="navigation" class="navigation" flex="~ justify-center items-center" h-42px bg-hex-fff>
-            <div max-w-1294px flex-auto text-hex-8a8a8a lt-m1360="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » 常见问题</div>
+            <div max-w-1294px flex-auto text-hex-8a8a8a lt-s1366="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » 常见问题</div>
         </div>
-        <div flex="~ justify-center" mt-24px lt-m1360="mx-24px">
-            <div flex="~ auto justify-between" max-w-1294px>
-                <div class="main" flex="auto" w-1px>
+        <div flex="~ justify-center" mt-24px lt-s1366="mx-24px">
+            <div class="page-layout">
+                <div class="page-main">
                     <el-skeleton
                         flex="~ wrap justify-between"
                         :loading="loading"
@@ -14,7 +14,7 @@
                         :count="9"
                     >
                         <template #template>
-                            <div w="[calc((100%-24px)/2)]" bg="hex-fff" mb-24px>
+                            <div class="faqs-grid-item" bg="hex-fff" mb-24px>
                                 <el-skeleton-item variant="text" class="!w-1/2 !h-44px" />
                                 <el-skeleton-item variant="text" class="!w-80% !h-21px" />
                                 <el-skeleton-item variant="text" class="!w-80% !h-21px" />
@@ -26,7 +26,7 @@
                             <ul flex="~ wrap justify-between">
                                 <li
                                     v-for="(item, index) in faqsLists.list" :key="index"
-                                    w="[calc((100%-24px)/2)]" mb-24px b-rd-6px p-24px transition="all duration-.3s" bg="hex-fff"
+                                    class="faqs-grid-item" mb-24px b-rd-6px p-24px transition="all duration-.3s" bg="hex-fff"
                                 >
                                     <NuxtLink :to="`/faqs/detail?id=${item.id}`">
                                         <h2 class="faqs-q" relative line-2 mb-16px min-h-24px pl-36px text-18px>{{ item.title }}</h2>

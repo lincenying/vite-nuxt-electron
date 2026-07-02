@@ -2,17 +2,17 @@
     <div v-loading="loading" class="global-wrap index-wrap">
         <OtherTopBanner title="SQLite文章" intro="这是一段描述文字，可以自定义你想要的文字" :img="topBannerImg"></OtherTopBanner>
         <div ref="navigation" class="navigation" flex="~ justify-center items-center" h-42px bg-hex-fff>
-            <div max-w-1294px flex-auto text-hex-8a8a8a lt-m1360="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » <NuxtLink to="/article">SQLite文章</NuxtLink> » 文章详情</div>
+            <div max-w-1294px flex-auto text-hex-8a8a8a lt-s1366="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » <NuxtLink to="/article">SQLite文章</NuxtLink> » 文章详情</div>
         </div>
-        <div flex="~ justify-center" mt-24px lt-m1360="mx-24px">
-            <div flex="~ auto justify-between" max-w-1294px>
-                <div class="sidebar" w-320px>
+        <div flex="~ justify-center" mt-24px lt-s1366="mx-24px">
+            <div class="page-layout">
+                <div class="page-sidebar">
                     <el-affix ref="affix" :offset="104">
                         <HomeRecommend></HomeRecommend>
                         <ArticleRecommend></ArticleRecommend>
                     </el-affix>
                 </div>
-                <div class="main" ml-24px w-1px flex="auto">
+                <div class="page-main">
                     <el-skeleton :loading="loading" animated>
                         <template #template>
                             <div bg="hex-fff" mb-24px p-32px>
@@ -29,7 +29,7 @@
                         <template #default>
                             <div mb-24px b-rd-6px p-32px bg="hex-fff">
                                 <h1 font-bold text="center hex-202935 28px">{{ articleDetail.title }}</h1>
-                                <div flex="~ justify-center items-center" mt-16px text="hex-8a8a8a">
+                                <div class="detail-meta" flex="~ justify-center items-center" mt-16px text="hex-8a8a8a">
                                     <i class="i-carbon-user-avatar" mr-5px h-14px w-14px></i>
                                     <span mr-20px>{{ articleDetail.author }}</span>
                                     <i class="i-carbon-time" mr-5px h-14px w-14px></i>

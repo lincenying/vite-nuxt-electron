@@ -2,17 +2,17 @@
     <div v-loading="loading" class="global-wrap news-wrap">
         <OtherTopBanner title="新闻中心" intro="这是一段描述文字，可以自定义你想要的文字" :img="topBannerImg"></OtherTopBanner>
         <div ref="navigation" class="navigation" flex="~ justify-center items-center" h-42px bg-hex-fff>
-            <div max-w-1294px flex-auto text-hex-8a8a8a lt-m1360="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » 新闻中心</div>
+            <div max-w-1294px flex-auto text-hex-8a8a8a lt-s1366="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » 新闻中心</div>
         </div>
-        <div flex="~ justify-center" mt-24px lt-m1360="mx-24px">
-            <div flex="~ auto justify-between" max-w-1294px>
-                <div class="sidebar" w-320px>
+        <div flex="~ justify-center" mt-24px lt-s1366="mx-24px">
+            <div class="page-layout">
+                <div class="page-sidebar">
                     <el-affix ref="affix" :offset="104">
                         <HomeRecommend></HomeRecommend>
                         <NewsRecommend></NewsRecommend>
                     </el-affix>
                 </div>
-                <div class="main" flex="auto" ml-24px w-1px>
+                <div class="page-main">
                     <el-skeleton :loading="loading" animated :count="9">
                         <template #template>
                             <div flex="~ items-center" mb-24px p-24px bg="hex-fff">

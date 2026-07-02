@@ -2,17 +2,17 @@
     <div v-loading="loading" class="global-wrap cases-wrap">
         <OtherTopBanner title="案例展示" intro="这是一段描述文字，可以自定义你想要的文字" :img="topBannerImg"></OtherTopBanner>
         <div ref="navigation" class="navigation" flex="~ justify-center items-center" h-42px bg-hex-fff>
-            <div max-w-1294px flex-auto text-hex-8a8a8a lt-m1360="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » 案例展示</div>
+            <div max-w-1294px flex-auto text-hex-8a8a8a lt-s1366="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » 案例展示</div>
         </div>
-        <div flex="~ justify-center" mt-24px lt-m1360="mx-24px">
-            <div flex="~ auto justify-between" max-w-1294px>
-                <div class="sidebar" w-320px>
+        <div flex="~ justify-center" mt-24px lt-s1366="mx-24px">
+            <div class="page-layout">
+                <div class="page-sidebar">
                     <el-affix ref="affix" :offset="104">
                         <HomeRecommend></HomeRecommend>
                         <CasesRecommend></CasesRecommend>
                     </el-affix>
                 </div>
-                <div class="main" flex="auto" ml-24px w-1px>
+                <div class="page-main">
                     <el-skeleton :loading="loading" animated :count="9">
                         <template #template>
                             <div flex="~ items-center" mb-24px p-24px bg="hex-fff">
@@ -31,9 +31,10 @@
                             <ul class="cases-ul">
                                 <li
                                     v-for="(item, index) in casesLists.list" :key="index"
+                                    class="cases-list-item"
                                     flex="~ wrap items-center" mb-24px overflow-hidden b-rd-6px p-24px bg="hex-fff"
                                 >
-                                    <NuxtLink flex="[0_0_300px]" mr-24px h-200px overflow-hidden b-rd-4px :to="`/cases/detail?id=${item.id}`">
+                                    <NuxtLink class="cases-list-cover" flex="[0_0_300px]" mr-24px h-200px overflow-hidden b-rd-4px :to="`/cases/detail?id=${item.id}`">
                                         <img
                                             :alt="item.title"
                                             :src="item.imgUrl"

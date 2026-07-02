@@ -2,18 +2,18 @@
     <div class="global-wrap index-wrap">
         <OtherTopBanner title="产品展示" intro="这是一段描述文字，可以自定义你想要的文字" :img="topBannerImg"></OtherTopBanner>
         <div ref="navigation" class="navigation" flex="~ justify-center items-center" h-42px bg-hex-fff>
-            <div max-w-1294px flex-auto text-hex-8a8a8a lt-m1360="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » 产品展示</div>
+            <div max-w-1294px flex-auto text-hex-8a8a8a lt-s1366="mx-24px">当前位置：<NuxtLink to="/">首页</NuxtLink> » 产品展示</div>
         </div>
-        <div flex="~ justify-center" mt-24px lt-m1360="mx-24px">
-            <div flex="~ auto justify-between" max-w-1294px>
-                <div class="sidebar" w-320px>
+        <div flex="~ justify-center" mt-24px lt-s1366="mx-24px">
+            <div class="page-layout">
+                <div class="page-sidebar">
                     <HomeCategory :category-id="category"></HomeCategory>
                     <el-affix ref="affix" :offset="104">
                         <HomeRecommend></HomeRecommend>
                         <NewsRecommend></NewsRecommend>
                     </el-affix>
                 </div>
-                <div class="main" ml-24px w-1px flex="auto">
+                <div class="page-main">
                     <el-skeleton
                         flex="~ wrap justify-between"
                         :loading="loading"
@@ -21,7 +21,7 @@
                         :count="9"
                     >
                         <template #template>
-                            <div w="[calc((100%-48px)/3)]" bg="hex-fff" mb-24px>
+                            <div class="home-grid-item" bg="hex-fff" mb-24px>
                                 <el-skeleton-item variant="image" class="!w-full !h-200px" />
                                 <div p-14px>
                                     <el-skeleton-item variant="text" class="w-1/2 !h-44px" />
@@ -37,7 +37,7 @@
                             <ul class="home-ul" flex="~ wrap justify-between">
                                 <li
                                     v-for="(item, index) in productLists.list" :key="index"
-                                    w="[calc((100%-48px)/3)]" mb-24px bg="hex-fff"
+                                    class="home-grid-item" mb-24px bg="hex-fff"
                                 >
                                     <NuxtLink :to="`/home/detail?id=${item.id}`" pt="2/3" relative block overflow-hidden b-rd-6px>
                                         <img
