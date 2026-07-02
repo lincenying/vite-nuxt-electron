@@ -11,7 +11,7 @@ export function getCasesList(payload: ListPayload) {
 
 /** 获取案例详情（复用新闻详情接口） */
 export function getCasesDetail(id: string) {
-    return useHttp.$get<NewsType>('/api/news/detail', { id })
+    return useHttp.$get<NewsType>('/api/cases/detail', { id })
 }
 
 /** 获取案例推荐 */

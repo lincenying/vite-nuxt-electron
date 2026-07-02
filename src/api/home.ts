@@ -1,6 +1,7 @@
 import type { ListPayload } from '#shared/types'
 import type { ProductsType } from '~/types/home.types'
 import type { HttpAsyncData } from '~/types/http.types'
+import type { NewsType } from '~/types/news.types'
 import type { ProductCategory, ProductState } from '~/types/pinia.types'
 
 /** 获取首页产品列表 */
@@ -21,4 +22,9 @@ export function getHomeRecommend(): HttpAsyncData<ProductsType[]> {
 /** 获取相关推荐 */
 export function getHomeRelatedRecom(params: Record<string, string | number>): HttpAsyncData<ProductsType[]> {
     return useHttp.get<ProductsType[]>('/api/home/relatedRecom', params)
+}
+
+/** 获取产品详情 */
+export function getHomeDetail(id: string) {
+    return useHttp.$get<NewsType>('/api/home/detail', { id })
 }

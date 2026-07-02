@@ -2,8 +2,7 @@ import type { ListPayload } from '#shared/types'
 import type { ProductCategory, ProductState } from '../types/pinia.types'
 import { isEmpty } from '@lincy/utils'
 import { acceptHMRUpdate } from 'pinia'
-import { getHomeCategory, getHomeList } from '~/api/home'
-import { getNewsDetail } from '~/api/news'
+import { getHomeCategory, getHomeList, getHomeDetail } from '~/api/home'
 
 import { defaultList } from '~/constants'
 
@@ -33,7 +32,7 @@ const usePiniaStore = defineStore('productStore', () => {
     }
 
     const getDetail = async (id: string) => {
-        const data = await getNewsDetail(id)
+        const data = await getHomeDetail(id)
         if (data) {
             state.detail[id] = data
         }

@@ -10,7 +10,7 @@ export function getFaqsList(payload: ListPayload) {
 
 /** 获取常见问题详情 */
 export function getFaqsDetail(id: string) {
-    return useHttp.$get<FaqsType>('/api/news/detail', { id })
+    return useHttp.$get<FaqsType>('/api/faqs/detail', { id })
 }
 
 /** 获取常见问题推荐 */
