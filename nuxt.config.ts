@@ -6,6 +6,16 @@ import { appDescription } from './src/constants/index'
 
 const apiHost = process.env.NUXT_API_HOST || 'https://php.mmxiaowu.com'
 
+/** 解析布尔型环境变量（true/1/yes/on 为启用） */
+function parseEnvBool(value: string | undefined, defaultValue: boolean): boolean {
+    if (value === undefined || value === '')
+        return defaultValue
+    return ['1', 'true', 'yes', 'on'].includes(value.toLowerCase())
+}
+
+/** 是否启用 Electron，未设置时默认启用以保持模板原有行为 */
+const isElectronEnabled = parseEnvBool(process.env.NUXT_ELECTRON_ENABLED, true)
+
 export default defineNuxtConfig({
     srcDir: 'src',
 
@@ -13,6 +23,7 @@ export default defineNuxtConfig({
         apiHost,
         public: {
             apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
+            electronEnabled: isElectronEnabled,
         },
     },
 
@@ -24,7 +35,7 @@ export default defineNuxtConfig({
         '@vue-macros/nuxt',
         '@vueuse/nuxt',
         '@nuxt/image',
-        'nuxt-electron',
+        ...(isElectronEnabled ? ['nuxt-electron'] : []),
     ],
 
     elementPlus: { /** Options */ },
@@ -184,23 +195,27 @@ export default defineNuxtConfig({
         },
     },
 
-    electron: {
-        build: [
-            {
-                entry: 'src/electron/main.ts',
-            },
-            {
-                entry: 'src/electron/preload.ts',
-                onstart(options: { reload: () => void }) {
-                    // Notify the renderer process to reload the page when the preload-script is completely loaded
-                    // Instead of restarting the entire electron app
-                    options.reload()
+    ...(isElectronEnabled
+        ? {
+                electron: {
+                    build: [
+                        {
+                            entry: 'src/electron/main.ts',
+                        },
+                        {
+                            entry: 'src/electron/preload.ts',
+                            onstart(options: { reload: () => void }) {
+                                // Notify the renderer process to reload the page when the preload-script is completely loaded
+                                // Instead of restarting the entire electron app
+                                options.reload()
+                            },
+                        },
+                    ],
+                    renderer: {},
+                    disableDefaultOptions: true,
                 },
-            },
-        ],
-        renderer: {},
-        disableDefaultOptions: true,
-    },
+            }
+        : {}),
 
     compatibilityDate: '2025-07-05',
 })

@@ -11,13 +11,13 @@
     "build": "pnpm app:build",
     "preview": "pnpm app:preview",
     "nuxt:postinstall": "nuxt prepare",
-    "nuxt:dev": "nuxt dev",
-    "nuxt:build": "nuxt build",
-    "nuxt:generate": "nuxt generate",
-    "nuxt:preview": "nuxt preview",
-    "app:dev": "nuxt dev",
-    "app:build": "pnpm nuxt:build && tsc && electron-builder",
-    "app:preview": "pnpm nuxt:build && tsc && electron .",
+    "nuxt:dev": "NUXT_ELECTRON_ENABLED=false nuxt dev",
+    "nuxt:build": "NUXT_ELECTRON_ENABLED=false nuxt build",
+    "nuxt:generate": "NUXT_ELECTRON_ENABLED=false nuxt generate",
+    "nuxt:preview": "NUXT_ELECTRON_ENABLED=false nuxt preview",
+    "app:dev": "NUXT_ELECTRON_ENABLED=true nuxt dev",
+    "app:build": "NUXT_ELECTRON_ENABLED=true nuxt build && tsc && electron-builder",
+    "app:preview": "NUXT_ELECTRON_ENABLED=true nuxt build && tsc && electron .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:ts": "vue-tsc --noEmit",
@@ -81,6 +81,7 @@
     "@pinia/nuxt": "^0.11.3",
     "@types/md5": "^2.3.6",
     "@types/mockjs": "^1.0.10",
+    "@types/nprogress": "catalog:",
     "@typescript-eslint/parser": "^8.62.1",
     "@unocss/eslint-config": "^66.7.4",
     "@unocss/nuxt": "^66.7.4",
@@ -108,5 +109,8 @@
     "vue": "^3.5.39",
     "vue-inline-svg": "^4.0.1",
     "vue-tsc": "^3.3.6"
+  },
+  "dependencies": {
+    "nprogress": "catalog:"
   }
 }
