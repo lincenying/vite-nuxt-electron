@@ -77,11 +77,10 @@
     "@lincy/utils": "^0.7.3",
     "@nuxt/image": "^2.0.0",
     "@nuxtjs/color-mode": "^4.0.1",
-    "@nuxtjs/tailwindcss": "^6.14.0",
     "@pinia/nuxt": "^0.11.3",
     "@types/md5": "^2.3.6",
     "@types/mockjs": "^1.0.10",
-    "@types/nprogress": "catalog:",
+    "@types/nprogress": "^0.2.3",
     "@typescript-eslint/parser": "^8.62.1",
     "@unocss/eslint-config": "^66.7.4",
     "@unocss/nuxt": "^66.7.4",
@@ -97,6 +96,7 @@
     "md-editor-v3": "^6.5.3",
     "md5": "^2.3.0",
     "mockjs": "^1.1.0",
+    "nprogress": "^0.2.0",
     "nuxt": "^4.4.8",
     "nuxt-electron": "^0.7.0",
     "pinia": "^3.0.4",
@@ -109,8 +109,5 @@
     "vue": "^3.5.39",
     "vue-inline-svg": "^4.0.1",
     "vue-tsc": "^3.3.6"
-  },
-  "dependencies": {
-    "nprogress": "catalog:"
   }
 }

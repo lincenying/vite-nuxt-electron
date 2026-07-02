@@ -53,6 +53,3 @@ minimumReleaseAgeExclude:
   - vue-tsc@3.3.6
   - vite@8.1.2
 
-catalog:
-  '@types/nprogress': ^0.2.3
-  nprogress: ^0.2.0
