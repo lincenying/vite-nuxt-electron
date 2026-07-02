@@ -135,5 +135,8 @@ const layer: GlobalDialogLayer<Nullable<ArticleType>> = reactive({
     showButton: true,
     width: '800px',
     row: null,
+    disabledBtn: false,
+    loadingBtn: false,
+    showCancel: true,
 })
 </script>

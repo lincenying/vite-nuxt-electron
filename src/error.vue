@@ -1,26 +1,67 @@
 <template>
-    <main p="x16px y40px" text="center teal-700 dark:gray-200">
-        <div text-36px lh-40px>
-            <div i-carbon-warning inline-block />
-        </div>
-        <div>{{ error?.statusCode === 404 ? '页面未找到' : '出错了' }}</div>
-        <p mt-12px text-14px text-gray-500>{{ error?.message }}</p>
-        <div>
-            <button btn text-14px lh-20px m="12px t32px" @click="handleError">返回首页</button>
-        </div>
+    <main id="root" flex="~ col">
+        <Header />
+        <OtherErrorPage
+            :status-code="statusCode"
+            :message="errorMessage"
+            :show-error-message="showErrorMessage"
+            @home="handleGoHome"
+            @back="handleGoBack"
+            @retry="handleRetry"
+        />
+        <Footer />
     </main>
 </template>
 
 <script setup lang="ts">
 import { appName } from '~/constants'
 
-const error = useError()
+import 'md-editor-v3/lib/style.css'
+import './assets/icon-font/icon-font.css'
+import './assets/scss/global/animate.min.css'
+import './assets/scss/global/global.scss'
+import './assets/scss/style.scss'
 
-useHead({
-    title: `Error - ${appName}`,
+const error = useError()
+const router = useRouter()
+
+const statusCode = computed(() => error.value?.statusCode ?? 500)
+const errorMessage = computed(() => error.value?.message)
+const showErrorMessage = computed(() => import.meta.dev && statusCode.value !== 404)
+
+const pageTitle = computed(() => {
+    return statusCode.value === 404
+        ? `页面未找到 - ${appName}`
+        : `服务器错误 - ${appName}`
 })
 
-function handleError() {
+useHead({
+    title: pageTitle,
+})
+
+const productStore = useProductStore()
+await callOnce('product-category', async () => {
+    return productStore.getCtegory()
+})
+
+/** 清除错误并返回首页 */
+function handleGoHome() {
     clearError({ redirect: '/' })
 }
+
+/** 清除错误并返回上一页 */
+function handleGoBack() {
+    if (import.meta.client && window.history.length > 1) {
+        clearError()
+        router.back()
+        return
+    }
+    handleGoHome()
+}
+
+/** 清除错误并重新加载当前页 */
+function handleRetry() {
+    clearError()
+}
+
 </script>

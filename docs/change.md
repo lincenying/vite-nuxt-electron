@@ -1,3 +1,32 @@
+## 2026-07-02 16:59:33
+
+**改动内容**：按站点风格重写 404/500 错误页面
+
+- **新建 `src/components/other/error-page.vue`**：复用 TopBanner、面包屑导航与白色卡片布局，区分 404/500 文案，提供返回首页、返回上页、重新加载操作
+- **`src/error.vue`**：接入 Header/Footer 与全局样式，开发环境 500 展示错误详情
+- **`src/pages/[...all].vue`**：未匹配路由使用统一错误页组件（default 布局）
+- **新建 `src/assets/scss/pages/error.scss`**：错误码 LED 字体与卡片阴影样式
+
+**Commit Message**：
+
+```
+feat: 按站点风格重写 404/500 错误页面
+```
+
+## 2026-07-02 16:24:25
+
+**改动内容**：新增 `NUXT_ELECTRON_ENABLED` 环境变量，控制是否启用 Electron
+
+- **`nuxt.config.ts`**：新增 `parseEnvBool` 与 `isElectronEnabled`；按环境变量条件加载 `nuxt-electron` 模块与 `electron` 配置；`runtimeConfig.public.electronEnabled` 暴露给客户端
+- **`package.json`**：`nuxt:*` 脚本默认 `NUXT_ELECTRON_ENABLED=false`（纯 Nuxt）；`app:*` 脚本默认 `NUXT_ELECTRON_ENABLED=true`（Electron 模式）
+- **`.env.example`**：补充 `NUXT_ELECTRON_ENABLED` 说明
+
+**Commit Message**：
+
+```
+feat: 新增 NUXT_ELECTRON_ENABLED 环境变量控制 Electron 开关
+```
+
 ## 2026-07-02 15:57:39
 
 **改动内容**：开发环境统一应用名称与图标，修正打包图标路径
