@@ -1,3 +1,16 @@
+## 2026-07-02 15:57:39
+
+**改动内容**：开发环境统一应用名称与图标，修正打包图标路径
+
+- **`src/electron/main.ts`**：新增 `APP_NAME`、`APP_ICON_PATH` 常量；调用 `app.setName()` 设置开发/预览环境应用名；为 `BrowserWindow` 设置窗口图标；macOS 下调用 `app.dock.setIcon()` 设置 Dock 图标
+- **`package.json`**：mac 打包图标改为 `./build/icons/icon.icns`；NSIS 安装/卸载图标路径修正为 `./build/icons/icon.ico`
+
+**Commit Message**：
+
+```
+feat: 开发环境统一应用名称与图标配置
+```
+
 ## 2026-06-30 15:00:00
 
 **改动内容**：将 Electron 应用显示名称改为 Electron模板

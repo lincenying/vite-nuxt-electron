@@ -2,13 +2,20 @@ import type { ChildProcess } from 'node:child_process'
 import { fork } from 'node:child_process'
 import path from 'node:path'
 import process from 'node:process'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, nativeImage } from 'electron'
 import { setupAppMenu } from './app-menu'
 import { setupContextMenu } from './context-menu'
+
+/** 应用显示名称（开发/预览环境），需与 package.json build.productName 保持一致 */
+const APP_NAME = 'Electron模板'
+const APP_ICON_PATH = path.join(__dirname, '../build/icons/icon.png')
+const appIcon = nativeImage.createFromPath(APP_ICON_PATH)
 
 const devServerUrl = process.env.VITE_DEV_SERVER_URL
 const isDev = !!devServerUrl
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
+
+app.setName(APP_NAME)
 
 const preload = path.join(__dirname, 'preload.js')
 
@@ -19,6 +26,7 @@ function createWindow() {
     const mainWindow = new BrowserWindow({
         width: 1480,
         height: 950,
+        ...(appIcon.isEmpty() ? {} : { icon: appIcon }),
         webPreferences: {
             preload,
             nodeIntegration: true,
@@ -47,6 +55,9 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+    if (process.platform === 'darwin' && !appIcon.isEmpty())
+        app.dock?.setIcon(appIcon)
+
     setupAppMenu(isDev)
     createWindow()
     app.on('activate', () => {

@@ -43,7 +43,7 @@
       "target": [
         "dmg"
       ],
-      "icon": "./build/icons/icon.ico"
+      "icon": "./build/icons/icon.icns"
     },
     "win": {
       "artifactName": "${productName}_${version}.${ext}",
@@ -62,8 +62,8 @@
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
       "deleteAppDataOnUninstall": false,
-      "installerIcon": "./build/icon.ico",
-      "uninstallerIcon": "./build/icon.ico"
+      "installerIcon": "./build/icons/icon.ico",
+      "uninstallerIcon": "./build/icons/icon.ico"
     }
   },
   "devDependencies": {
@@ -88,7 +88,7 @@
     "@vueuse/nuxt": "^14.3.0",
     "better-sqlite3": "^12.11.1",
     "concurrently": "^10.0.3",
-    "electron": "^42.5.1",
+    "electron": "^43.0.0",
     "electron-builder": "^26.15.3",
     "electron-icon-builder": "^2.0.1",
     "eslint": "^10.6.0",
@@ -102,11 +102,11 @@
     "sass": "^1.101.0",
     "store2": "^2.14.4",
     "typescript": "^6.0.3",
-    "vite": "^8.1.0",
+    "vite": "^8.1.2",
     "vite-plugin-electron": "^1.1.0",
     "vite-plugin-electron-renderer": "^1.0.0",
     "vue": "^3.5.39",
     "vue-inline-svg": "^4.0.1",
-    "vue-tsc": "^3.3.5"
+    "vue-tsc": "^3.3.6"
   }
 }

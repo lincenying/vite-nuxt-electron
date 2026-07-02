@@ -11,10 +11,6 @@ export default lincy(
             'dist/**/*.js',
             'dist/**/*.css',
             'src/assets/icon-font/*',
-            'z-components.d.ts',
-            'z-auto-imports.d.ts',
-            'src/polyfill/index.js',
-            '*.code-snippets',
         ],
         overrides: {
             yaml: {
