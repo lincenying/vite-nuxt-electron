@@ -34,14 +34,14 @@
                                     class="cases-list-item"
                                     flex="~ wrap items-center" mb-24px overflow-hidden b-rd-6px p-24px bg="hex-fff"
                                 >
-                                    <NuxtLink class="cases-list-cover" flex="[0_0_300px]" mr-24px h-200px overflow-hidden b-rd-4px :to="`/cases/detail?id=${item.id}`">
+                                    <NuxtLink class="cases-list-cover" flex-none mr-24px w-300px h-200px lt-s1280="w-200px"  overflow-hidden b-rd-4px :to="`/cases/detail?id=${item.id}`">
                                         <img
                                             :alt="item.title"
                                             :src="item.imgUrl"
                                             w="full" h="full" object-cover scale="100" transition="all duration-.3s"
                                         >
                                     </NuxtLink>
-                                    <div flex-1>
+                                    <div w-1px flex-1>
                                         <NuxtLink :to="`/cases/detail?id=${item.id}`"><h2 line-1 text-18px>{{ item.title }}</h2></NuxtLink>
                                         <p text="hex-8a8a8a 14px" line-4 mt-16px lh-20px>
                                             {{ item.intro }}
