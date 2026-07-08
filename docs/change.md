@@ -1,3 +1,16 @@
+## 2026-07-08 10:44:58
+
+**改动内容**：Header 导航支持小屏响应式菜单
+
+- **`src/components/global/header.vue`**：屏幕宽度 < 820px 时隐藏横向导航，右侧显示菜单图标，点击下拉展示完整导航（含产品分类子项）
+- **`src/assets/scss/global/layout.scss`**：新增 820px 断点样式、移动端菜单面板与过渡动画
+
+**Commit Message**：
+
+```
+feat: Header 导航支持小屏响应式下拉菜单
+```
+
 ## 2026-07-02 17:32:37
 
 **改动内容**：优化 README.md 文档
