@@ -1,15 +1,6 @@
-import Mock from 'mockjs'
+import { listNewsRecommend } from '~~/server/services/news.service'
+import { success } from '~~/server/utils/response'
 
-export default defineEventHandler(async (_event) => {
-    const template = Array.from({ length: 4 }, (_, index) => ({
-        id: index + 1,
-        date: '@date("yyyy-MM-dd")',
-        title: '@ctitle(10, 30)',
-    }))
-    const data = Mock.mock(template)
-    return {
-        code: 200,
-        message: 'ok',
-        data,
-    }
+export default defineEventHandler(async () => {
+    return success(listNewsRecommend())
 })

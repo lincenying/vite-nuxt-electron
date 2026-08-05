@@ -1,22 +1,13 @@
-import Mock from 'mockjs'
+import { getValidatedQuery } from 'h3'
+import { getCaseDetail } from '~~/server/services/case.service'
+import { idQuerySchema } from '~~/server/utils/schemas'
+import { fail, success } from '~~/server/utils/response'
 
-export default defineEventHandler(async (_event) => {
-    const template = {
-        id: 1,
-        title: '@ctitle(10, 20)',
-        author: '@cname',
-        date: '@date("yyyy-MM-dd")',
-        category: '@ctitle(3, 5)',
-        category_id: '@integer(1, 1000)',
-        intro: '@cparagraph(10, 15)',
-        content: '<p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p><p>@cparagraph(10, 15)</p>',
-        imgUrl: '@image("800x400", "#4A7BF7", "#FFF", "png", "img")',
-        views: '@integer(100, 1000)',
+export default defineEventHandler(async (event) => {
+    const query = await getValidatedQuery(event, idQuerySchema.parse)
+    const data = getCaseDetail(query.id)
+    if (!data) {
+        return fail(404, '案例不存在')
     }
-    const data = Mock.mock(template)
-    return {
-        code: 200,
-        message: 'ok',
-        data,
-    }
+    return success(data)
 })

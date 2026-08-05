@@ -1,3 +1,18 @@
+## 2026-08-05 14:26:30
+
+**改动内容**：用 Drizzle ORM + SQLite 替换 Mock 接口，落地真实数据层
+
+- **新增** `server/db/`（schema、实例、seed）、`server/services/`、`server/config/database.ts`、`server/plugins/db-init.ts`、`drizzle.config.ts`
+- **改写** home/news/cases/faqs/comment/user 与 user 接口为 Drizzle 查询，删除 `sqlite3/init.ts`
+- **依赖** 增加 `drizzle-orm`、`drizzle-kit`、`zod`；库文件 `.data/app.db`，启动空库自动种子填充
+- **配置** 移除 Nitro `experimental.database`，新增 `NUXT_DATABASE_URL` 与 `db:generate` / `db:push` / `db:seed` 脚本
+
+**Commit Message**：
+
+```
+feat: 用 Drizzle+SQLite 实现真实 API 并填充种子数据
+```
+
 ## 2026-07-08 10:44:58
 
 **改动内容**：Header 导航支持小屏响应式菜单

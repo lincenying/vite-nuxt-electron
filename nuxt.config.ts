@@ -21,6 +21,7 @@ export default defineNuxtConfig({
 
     runtimeConfig: {
         apiHost,
+        databaseUrl: process.env.NUXT_DATABASE_URL || 'file:.data/app.db',
         public: {
             apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
             electronEnabled: isElectronEnabled,
@@ -78,20 +79,9 @@ export default defineNuxtConfig({
                 base: './.data/fsdb',
             },
         },
-        // 开启sqlite数据库存储
-        experimental: {
-            database: true,
-        },
-        database: {
-            // 配置SQLite数据库
-            sqlite3: {
-                connector: 'better-sqlite3',
-                options: {
-                // 相对项目根目录
-                    path: './.data/db.sqlite3',
-                    name: 'db',
-                },
-            },
+        // SQLite 由 Drizzle ORM 直连（见 server/db），不再使用 Nitro experimental.database
+        externals: {
+            external: ['better-sqlite3'],
         },
     },
 
@@ -112,7 +102,7 @@ export default defineNuxtConfig({
         },
     },
 
-    ssr: false,
+    ssr: !isElectronEnabled, // 在Electron中禁用SSR
 
     devtools: {
         enabled: true,

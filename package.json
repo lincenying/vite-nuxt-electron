@@ -24,7 +24,10 @@
     "typecheck": "nuxt typecheck",
     "lint:css": "stylelint '**/*.{css,scss}' --fix",
     "pack": "electron-builder",
-    "electron:generate-icons": "electron-icon-builder --input=./public/favicon.png --output=build --flatten"
+    "electron:generate-icons": "electron-icon-builder --input=./public/favicon.png --output=build --flatten",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:seed": "node --import jiti/register server/db/seed-cli.ts"
   },
   "build": {
     "appId": "your.app.id",
@@ -78,6 +81,7 @@
     "@nuxt/image": "catalog:",
     "@nuxtjs/color-mode": "catalog:",
     "@pinia/nuxt": "catalog:",
+    "@types/better-sqlite3": "catalog:",
     "@types/md5": "catalog:",
     "@types/mockjs": "catalog:",
     "@types/nprogress": "catalog:",
@@ -88,6 +92,8 @@
     "@vueuse/nuxt": "catalog:",
     "better-sqlite3": "catalog:",
     "concurrently": "catalog:",
+    "drizzle-kit": "catalog:",
+    "drizzle-orm": "catalog:",
     "electron": "catalog:",
     "electron-builder": "catalog:",
     "electron-icon-builder": "catalog:",
@@ -95,6 +101,7 @@
     "eslint-plugin-format": "catalog:",
     "md-editor-v3": "catalog:",
     "md5": "catalog:",
+    "mitt": "catalog:",
     "mockjs": "catalog:",
     "nprogress": "catalog:",
     "nuxt": "catalog:",
@@ -108,6 +115,7 @@
     "vite-plugin-electron-renderer": "catalog:",
     "vue": "catalog:",
     "vue-inline-svg": "catalog:",
-    "vue-tsc": "catalog:"
+    "vue-tsc": "catalog:",
+    "zod": "catalog:"
   }
 }

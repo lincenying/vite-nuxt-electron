@@ -1,31 +1,10 @@
-import type { ListPageType } from '~~/server/types'
-import Mock from 'mockjs'
-import { getRandomValue } from '~~/server/utils'
-import { imgUrl } from '~~/server/utils/img'
+import { getValidatedQuery } from 'h3'
+import { listProducts } from '~~/server/services/product.service'
+import { productListSchema } from '~~/server/utils/schemas'
+import { success } from '~~/server/utils/response'
 
 export default defineEventHandler(async (event) => {
-    let { page, pageSize } = getQuery<ListPageType>(event)
-    page = page || 1
-    pageSize = pageSize || 12
-    const template = {
-        list: Array.from({ length: pageSize }, (_, index) => ({
-            id: (page - 1) * pageSize + index + 1,
-            category: (page - 1) * pageSize + index + 1,
-            imgUrl: getRandomValue(imgUrl),
-            title: '@ctitle(7, 20)',
-            date: '@date("yyyy-MM-dd")',
-            tag: Array.from({ length: 3 }).fill('@cword(3, 5)'),
-        })),
-        hasPrev: page > 1 ? 1 : 0,
-        hasNext: 1,
-        total: 100,
-        pageSize: Number(pageSize),
-        currPage: Number(page),
-    }
-    const data = Mock.mock(template)
-    return {
-        code: 200,
-        message: 'ok',
-        data,
-    }
+    const query = await getValidatedQuery(event, productListSchema.parse)
+    const data = listProducts(query.page, query.pageSize, query.category, query.tag)
+    return success(data)
 })

@@ -32,3 +32,6 @@ dist-electron
 .env
 .cursor/rules/global*.mdc
 .qoder/rules/global*.mdc
+
+# SQLite / local data
+.data

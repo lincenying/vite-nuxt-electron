@@ -1,15 +1,9 @@
-import Mock from 'mockjs'
+import { getValidatedQuery } from 'h3'
+import { listProductRelated } from '~~/server/services/product.service'
+import { relatedQuerySchema } from '~~/server/utils/schemas'
+import { success } from '~~/server/utils/response'
 
-export default defineEventHandler(async (_event) => {
-    const template = Array.from({ length: 10 }, (_, index) => ({
-        id: index + 1,
-        date: '@date("yyyy-MM-dd")',
-        title: '@ctitle(10, 30)',
-    }))
-    const data = Mock.mock(template)
-    return {
-        code: 200,
-        message: 'ok',
-        data,
-    }
+export default defineEventHandler(async (event) => {
+    const query = await getValidatedQuery(event, relatedQuerySchema.parse)
+    return success(listProductRelated(query.categoryId))
 })

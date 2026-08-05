@@ -7,25 +7,25 @@ import type { ArticleState } from '~/types/pinia.types'
 
 /** 获取 SQLite 文章列表 */
 export function getArticleList(payload: ListPayload) {
-    return useHttp.$get<ArticleState['index']>('/api/sqlite3/article/lists', payload)
+    return useHttp.$get<ArticleState['index']>('/api/article/lists', payload)
 }
 
 /** 获取 SQLite 文章详情 */
 export function getArticleDetail(id: string) {
-    return useHttp.$get<ArticleType>('/api/sqlite3/article/detail', { id })
+    return useHttp.$get<ArticleType>('/api/article/detail', { id })
 }
 
 /** 获取文章推荐 */
 export function getArticleRecommend(): HttpAsyncData<ArticleType[]> {
-    return useHttp.get<ArticleType[]>('/api/sqlite3/article/relatedRecom', {})
+    return useHttp.get<ArticleType[]>('/api/article/relatedRecom', {})
 }
 
 /** 发布 SQLite 文章 */
 export function postArticle(body: Record<string, unknown>) {
-    return useHttp.$post<unknown>('/api/sqlite3/article/add', {}, { body })
+    return useHttp.$post<unknown>('/api/article/add', {}, { body })
 }
 
 /** 编辑 SQLite 文章 */
 export function editArticle(body: Record<string, unknown>) {
-    return useHttp.$post<unknown>('/api/sqlite3/article/edit', {}, { body })
+    return useHttp.$post<unknown>('/api/article/edit', {}, { body })
 }
