@@ -62,6 +62,8 @@
                                         </div>
                                     </div>
                                 </li>
+                                <li class="home-grid-item h-0"></li>
+                                <li class="home-grid-item h-0"></li>
                             </ul>
                             <div v-if="productLists.total > pageSize" class="page" flex="~ justify-center" mb-24px>
                                 <el-pagination background layout="prev, pager, next" :total="productLists.total" :current-page="page" :page-size="pageSize" @current-change="currentChange" />
