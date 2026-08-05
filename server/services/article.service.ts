@@ -10,7 +10,7 @@ import { buildPageResult, getOffset } from '../utils/pagination'
 export function listArticles(page: number, pageSize: number) {
     const db = useDb()
     const offset = getOffset(page, pageSize)
-    const [{ value: total }] = db.select({ value: count() }).from(articles).all()
+    const total = db.select({ value: count() }).from(articles).get()?.value ?? 0
     const list = db
         .select()
         .from(articles)

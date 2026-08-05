@@ -176,7 +176,7 @@ export function ensureSchema() {
  */
 export function seedIfEmpty(options: { force?: boolean } = {}) {
     const db = useDb()
-    const [{ value: userCount }] = db.select({ value: count() }).from(users).all()
+    const userCount = db.select({ value: count() }).from(users).get()?.value ?? 0
 
     if (userCount > 0 && !options.force) {
         return { seeded: false }

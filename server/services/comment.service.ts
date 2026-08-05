@@ -26,7 +26,7 @@ export function listComments(options: {
         isNull(comments.parentId),
     )
 
-    const [{ value: total }] = db.select({ value: count() }).from(comments).where(parentWhere).all()
+    const total = db.select({ value: count() }).from(comments).where(parentWhere).get()?.value ?? 0
 
     const parents = db
         .select()

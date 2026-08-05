@@ -1,4 +1,17 @@
+## 2026-08-05 14:46:54
+
+**改动内容**：评论列表无数据时展示空状态提示
+
+- **`src/components/other/comments.vue`**：无评论时使用 Element Plus `el-empty` 提示「暂无评论，快来发表第一条吧」（各详情页共用）
+
+**Commit Message**：
+
+```
+feat: 评论列表无数据时展示空状态提示
+```
+
 ## 2026-08-05 14:26:30
+
 
 **改动内容**：用 Drizzle ORM + SQLite 替换 Mock 接口，落地真实数据层
 

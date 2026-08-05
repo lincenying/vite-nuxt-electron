@@ -115,7 +115,7 @@ export function getContentRelated(table: ContentTable, options: { categoryId?: n
 export function getSimpleContentList(table: typeof news | typeof faqs, page: number, pageSize: number) {
     const db = useDb()
     const offset = getOffset(page, pageSize)
-    const [{ value: total }] = db.select({ value: count() }).from(table).all()
+    const total = db.select({ value: count() }).from(table).get()?.value ?? 0
     const list = db
         .select({
             id: table.id,
@@ -137,7 +137,7 @@ export function getSimpleContentList(table: typeof news | typeof faqs, page: num
 export function getCoverContentList(table: typeof cases, page: number, pageSize: number) {
     const db = useDb()
     const offset = getOffset(page, pageSize)
-    const [{ value: total }] = db.select({ value: count() }).from(table).all()
+    const total = db.select({ value: count() }).from(table).get()?.value ?? 0
     const list = db
         .select({
             id: table.id,
@@ -184,7 +184,7 @@ export function getProductList(options: {
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined
 
     const totalQuery = db.select({ value: count() }).from(products)
-    const [{ value: total }] = (whereClause ? totalQuery.where(whereClause) : totalQuery).all()
+    const total = (whereClause ? totalQuery.where(whereClause) : totalQuery).get()?.value ?? 0
 
     const listQuery = db
         .select({
