@@ -132,7 +132,7 @@ export default defineNuxtConfig({
             },
         },
         server: {
-            hmr: {
+            ws: {
                 port: 57123,
             },
         },

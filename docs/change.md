@@ -1,3 +1,15 @@
+## 2026-09-02 11:43:59
+
+**改动内容**：将 Vite 已弃用的 `server.hmr.port` 迁移为 `server.ws.port`，消除 Vite 8 开发服务器弃用警告
+
+- **`nuxt.config.ts`**：HMR WebSocket 端口配置从 `vite.server.hmr.port` 改为 `vite.server.ws.port`（57123）
+
+**Commit Message**：
+
+```
+fix: 将 Vite HMR 端口配置迁移到 server.ws
+```
+
 ## 2026-08-05 14:46:54
 
 **改动内容**：评论列表无数据时展示空状态提示
