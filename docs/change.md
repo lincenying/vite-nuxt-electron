@@ -50,7 +50,6 @@ feat: 评论列表无数据时展示空状态提示
 
 ## 2026-08-05 14:26:30
 
-
 **改动内容**：用 Drizzle ORM + SQLite 替换 Mock 接口，落地真实数据层
 
 - **新增** `server/db/`（schema、实例、seed）、`server/services/`、`server/config/database.ts`、`server/plugins/db-init.ts`、`drizzle.config.ts`

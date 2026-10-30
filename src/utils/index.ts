@@ -1,4 +1,3 @@
-
 /** 将换行符替换为 \<br\> */
 export function nl2br(str: string) {
     if (!str)

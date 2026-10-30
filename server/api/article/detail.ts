@@ -1,7 +1,7 @@
 import { getValidatedQuery } from 'h3'
 import { getArticleDetail } from '~~/server/services/article.service'
-import { idQuerySchema } from '~~/server/utils/schemas'
 import { fail, success } from '~~/server/utils/response'
+import { idQuerySchema } from '~~/server/utils/schemas'
 
 export default defineEventHandler(async (event) => {
     const query = await getValidatedQuery(event, idQuerySchema.parse)

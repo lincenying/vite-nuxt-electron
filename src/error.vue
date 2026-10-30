@@ -30,9 +30,7 @@ const errorMessage = computed(() => error.value?.message)
 const showErrorMessage = computed(() => import.meta.dev && statusCode.value !== 404)
 
 const pageTitle = computed(() => {
-    return statusCode.value === 404
-        ? `页面未找到 - ${appName}`
-        : `服务器错误 - ${appName}`
+    return statusCode.value === 404 ? `页面未找到 - ${appName}` : `服务器错误 - ${appName}`
 })
 
 useHead({
@@ -63,5 +61,4 @@ function handleGoBack() {
 function handleRetry() {
     clearError()
 }
-
 </script>

@@ -1,6 +1,7 @@
+import type { cases, faqs, news } from '../db/schema'
 import { and, count, desc, eq, like } from 'drizzle-orm'
 import { useDb } from '../db'
-import { cases, faqs, news, products } from '../db/schema'
+import { products } from '../db/schema'
 import { buildPageResult, getOffset } from '../utils/pagination'
 
 export interface ContentDetail {
@@ -16,7 +17,7 @@ export interface ContentDetail {
     views: number
 }
 
-type ContentRow = {
+interface ContentRow {
     id: number
     title: string
     author: string

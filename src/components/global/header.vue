@@ -1,6 +1,6 @@
 <template>
     <div class="global-header" flex="~ none justify-center items-center" h="80px!" fixed left-0 top-0 z-999 w-100vw bg-hex-fff>
-        <div ref="headerInnerRef" class="global-header__inner" flex="~ justify-between items-center auto" w-full max-w-1294px lt-s1366="mx-24px">
+        <div ref="headerInnerRef" class="global-header__inner" flex="~ justify-between items-center auto" max-w-1294px w-full lt-s1366="mx-24px">
             <div flex="~ items-center">
                 <img :src="NavLogo" h-31px w-109px alt="">
                 <div class="menu-wrap menu-wrap--desktop" flex="~ items-center" ml-64px>

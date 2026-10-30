@@ -18,16 +18,16 @@
                 <div class="error-code" text="hex-0d6efd 120px" lh-120px op-90>
                     {{ statusCode }}
                 </div>
-                <div mt-16px h-2px w-10px bg-hex-0d6efd mx-auto />
+                <div mx-auto mt-16px h-2px w-10px bg-hex-0d6efd />
                 <h1 mt-24px text="hex-202935 24px" font-700 tracking-1px>
                     {{ pageInfo.title }}
                 </h1>
-                <p mt-16px mx-auto max-w-480px text="hex-8a8a8a 15px" lh-24px>
+                <p text="hex-8a8a8a 15px" mx-auto mt-16px max-w-480px lh-24px>
                     {{ pageInfo.description }}
                 </p>
                 <p
                     v-if="showErrorMessage && message"
-                    mt-12px mx-auto max-w-480px text="hex-8a8a8a 13px" lh-20px op-70
+                    text="hex-8a8a8a 13px" mx-auto mt-12px max-w-480px lh-20px op-70
                 >
                     {{ message }}
                 </p>

@@ -1,6 +1,6 @@
-import process from 'node:process'
-
 import type { Plugin } from 'vite'
+
+import process from 'node:process'
 import { esmShim } from 'vite-plugin-electron/plugin'
 
 // import { viteCss as vite } from './nuxt.config.vite'

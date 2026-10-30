@@ -2,7 +2,7 @@ import type { ListPayload } from '#shared/types'
 import type { ProductCategory, ProductState } from '../types/pinia.types'
 import { isEmpty } from '@lincy/utils'
 import { acceptHMRUpdate } from 'pinia'
-import { getHomeCategory, getHomeList, getHomeDetail } from '~/api/home'
+import { getHomeCategory, getHomeDetail, getHomeList } from '~/api/home'
 
 import { defaultList } from '~/constants'
 

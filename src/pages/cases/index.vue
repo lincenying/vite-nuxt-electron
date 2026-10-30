@@ -34,7 +34,7 @@
                                     class="cases-list-item"
                                     flex="~ wrap items-center" mb-24px overflow-hidden b-rd-6px p-24px bg="hex-fff"
                                 >
-                                    <NuxtLink class="cases-list-cover" flex-none mr-24px w-300px h-200px lt-s1280="w-200px"  overflow-hidden b-rd-4px :to="`/cases/detail?id=${item.id}`">
+                                    <NuxtLink class="cases-list-cover" lt-s1280="w-200px" mr-24px h-200px w-300px flex-none overflow-hidden b-rd-4px :to="`/cases/detail?id=${item.id}`">
                                         <img
                                             :alt="item.title"
                                             :src="item.imgUrl"

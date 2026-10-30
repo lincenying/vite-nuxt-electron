@@ -38,5 +38,4 @@ function handleRetry() {
     if (import.meta.client)
         window.location.reload()
 }
-
 </script>

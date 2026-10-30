@@ -2,7 +2,7 @@ import type { ListPayload } from '#shared/types'
 import type { ProductsType } from '~/types/home.types'
 import type { HttpAsyncData } from '~/types/http.types'
 import type { NewsType } from '~/types/news.types'
-import type { ProductCategory, ProductState } from '~/types/pinia.types'
+import type { ProductState } from '~/types/pinia.types'
 
 /** 获取首页产品列表 */
 export function getHomeList(payload: ListPayload) {

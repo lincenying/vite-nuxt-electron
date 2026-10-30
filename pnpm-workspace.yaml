@@ -1,30 +1,18 @@
 # 控制是否以及如何将依赖项添加到默认目录中
-catalogMode: prefer
-
 # 是否忽略向工作区根目录添加依赖时的警告提示
 ignoreWorkspaceRootCheck: true
-
-# npm 包注册表的基本 URL（包括尾部斜杠）
-registry: https://registry.npmmirror.com/
-registries:
-  default: https://registry.npmmirror.com/
+catalogMode: prefer
 
 # 定义了版本发布后 pnpm 安装之前必须经过的最少分钟数
 minimumReleaseAge: 0
-
-# 是否强制提升所有依赖
-shamefullyHoist: true
-
-# 在执行脚本时使用POSIX shell模拟器替代系统原生shell
-shellEmulator: true
-
-# 用于控制是否严格检查对等依赖（peer dependencies）的版本一致性。
-# 当设置为 true 时，pnpm 会强制安装指定版本的对等依赖；
-# 设置为 false 时，会忽略版本不一致的警告
-strictPeerDependencies: false
+minimumReleaseAgeExclude:
+  - '@vue/language-core@3.3.6'
+  - electron@42.5.2 || 43.0.0
+  - vue-tsc@3.3.6
+  - vite@8.1.2
 
 # 当设置为“禁止降级”时，如果软件包的信任级别较之前的版本有所降低，pnpm 将无法安装
-trustPolicy: 'off'
+trustPolicy: off
 
 # 列出一个或多个 pnpm 应该允许安装的特定软件包或版本，即使这些软件包不满足信任策略要求。
 trustPolicyExclude:
@@ -34,8 +22,21 @@ trustPolicyExclude:
   - langium
   - undici-types
 
-ignoredBuiltDependencies:
-  - sharp
+# 用于控制是否严格检查对等依赖（peer dependencies）的版本一致性。
+# 当设置为 true 时，pnpm 会强制安装指定版本的对等依赖；
+# 设置为 false 时，会忽略版本不一致的警告
+strictPeerDependencies: false
+
+registries:
+  default: https://registry.npmmirror.com/
+
+# npm 包注册表的基本 URL（包括尾部斜杠）
+registry: https://registry.npmmirror.com/
+# 是否强制提升所有依赖
+shamefullyHoist: true
+
+# 在执行脚本时使用POSIX shell模拟器替代系统原生shell
+shellEmulator: true
 
 allowBuilds:
   '@parcel/watcher': true
@@ -47,57 +48,54 @@ allowBuilds:
   sharp: true
   vue-demi: true
 
-minimumReleaseAgeExclude:
-  - '@vue/language-core@3.3.6'
-  - electron@42.5.2 || 43.0.0
-  - vue-tsc@3.3.6
-  - vite@8.1.2
+ignoredBuiltDependencies:
+  - sharp
 
 catalog:
-  '@element-plus/nuxt': '^1.1.5'
-  '@iconify-json/carbon': '^1.2.29'
-  '@iconify-json/twemoji': '^1.2.5'
-  '@lincy/async-validation': '^1.4.0'
-  '@lincy/eslint-config': '^8.0.1'
-  '@lincy/stylelint-config': '^2.3.0'
-  '@lincy/unocss-base-config': '^3.0.0'
-  '@lincy/utils': '^0.7.3'
-  '@nuxt/image': '^2.2.0'
-  '@nuxtjs/color-mode': '^4.1.0'
-  '@pinia/nuxt': '^1.0.3'
+  '@element-plus/nuxt': ^1.1.5
+  '@iconify-json/carbon': ^1.2.29
+  '@iconify-json/twemoji': ^1.2.5
+  '@lincy/async-validation': ^1.4.0
+  '@lincy/eslint-config': ^8.0.1
+  '@lincy/stylelint-config': ^2.3.0
+  '@lincy/unocss-base-config': ^3.0.0
+  '@lincy/utils': ^0.7.3
+  '@nuxt/image': ^2.2.0
+  '@nuxtjs/color-mode': ^4.1.0
+  '@pinia/nuxt': ^1.0.3
   '@types/better-sqlite3': ^9.6.0
-  '@types/md5': '^2.3.6'
-  '@types/mockjs': '^1.0.10'
-  '@types/nprogress': '^0.2.3'
-  '@typescript-eslint/parser': '^8.72.1'
-  '@unocss/eslint-config': '^66.12.0'
-  '@unocss/nuxt': '^66.12.0'
-  '@vue-macros/nuxt': '^3.1.4'
-  '@vueuse/nuxt': '^15.0.0'
-  'better-sqlite3': '^13.0.3'
-  'concurrently': '^10.0.6'
+  '@types/md5': ^2.3.6
+  '@types/mockjs': ^1.0.10
+  '@types/nprogress': ^0.2.3
+  '@typescript-eslint/parser': ^8.72.1
+  '@unocss/eslint-config': ^66.12.0
+  '@unocss/nuxt': ^66.12.0
+  '@vue-macros/nuxt': ^3.1.4
+  '@vueuse/nuxt': ^15.0.0
+  better-sqlite3: ^13.0.3
+  concurrently: ^10.0.6
   drizzle-kit: ^0.31.11
   drizzle-orm: ^0.45.4
-  'electron': '^45.1.0'
-  'electron-builder': '^26.18.0'
-  'electron-icon-builder': '^2.0.1'
-  'eslint': '^10.13.0'
-  'eslint-plugin-format': '^2.0.1'
-  'md-editor-v3': '^7.1.0'
-  'md5': '^2.3.0'
+  electron: ^45.1.0
+  electron-builder: ^26.18.0
+  electron-icon-builder: ^2.0.1
+  eslint: ^10.13.0
+  eslint-plugin-format: ^2.0.1
+  md-editor-v3: ^7.1.0
+  md5: ^2.3.0
   mitt: ^3.0.1
-  'mockjs': '^1.1.0'
-  'nprogress': '^0.2.0'
-  'nuxt': '^4.6.3'
-  'nuxt-electron': '^0.7.0'
-  'pinia': '^4.1.0'
-  'sass': '^1.107.0'
-  'store2': '^2.14.4'
-  'typescript': '^6.0.3'
-  'vite': '^8.3.5'
-  'vite-plugin-electron': '^1.1.2'
-  'vite-plugin-electron-renderer': '^1.0.0'
-  'vue': '^3.5.44'
-  'vue-inline-svg': '^4.0.1'
-  'vue-tsc': '^3.3.14'
+  mockjs: ^1.1.0
+  nprogress: ^0.2.0
+  nuxt: ^4.6.3
+  nuxt-electron: ^0.7.0
+  pinia: ^4.1.0
+  sass: ^1.107.0
+  store2: ^2.14.4
+  typescript: ^6.0.3
+  vite: ^8.3.5
+  vite-plugin-electron: ^1.1.2
+  vite-plugin-electron-renderer: ^1.0.0
+  vue: ^3.5.44
+  vue-inline-svg: ^4.0.1
+  vue-tsc: ^3.3.14
   zod: ^4.6.7

@@ -15,14 +15,14 @@
 
 ## 技术栈
 
-| 类别 | 技术 |
-|------|------|
-| 框架 | Nuxt 4、Vue 3、TypeScript |
+| 类别   | 技术                                         |
+| ------ | -------------------------------------------- |
+| 框架   | Nuxt 4、Vue 3、TypeScript                    |
 | 桌面端 | Electron 43、nuxt-electron、electron-builder |
-| UI | Element Plus、UnoCSS、Sass |
-| 状态 | Pinia |
-| 服务端 | Nitro、better-sqlite3 |
-| 构建 | Vite 8 |
+| UI     | Element Plus、UnoCSS、Sass                   |
+| 状态   | Pinia                                        |
+| 服务端 | Nitro、better-sqlite3                        |
+| 构建   | Vite 8                                       |
 
 ## 环境要求
 
@@ -50,25 +50,25 @@ pnpm nuxt:dev
 
 ### 常用命令
 
-| 命令 | 说明 |
-|------|------|
-| `pnpm serve` | Electron 开发模式（等同 `app:dev`） |
-| `pnpm build` | Electron 打包（等同 `app:build`） |
-| `pnpm preview` | Electron 本地预览（等同 `app:preview`） |
-| `pnpm nuxt:dev` | 纯 Nuxt 开发，不启动 Electron |
-| `pnpm nuxt:build` | 纯 Nuxt 构建 |
-| `pnpm nuxt:preview` | 纯 Nuxt 预览 |
-| `pnpm typecheck` | Nuxt + TypeScript 类型检查 |
-| `pnpm lint` | ESLint 检查 |
-| `pnpm lint:fix` | ESLint 自动修复 |
-| `pnpm lint:css` | Stylelint 检查并修复 |
+| 命令                | 说明                                    |
+| ------------------- | --------------------------------------- |
+| `pnpm serve`        | Electron 开发模式（等同 `app:dev`）     |
+| `pnpm build`        | Electron 打包（等同 `app:build`）       |
+| `pnpm preview`      | Electron 本地预览（等同 `app:preview`） |
+| `pnpm nuxt:dev`     | 纯 Nuxt 开发，不启动 Electron           |
+| `pnpm nuxt:build`   | 纯 Nuxt 构建                            |
+| `pnpm nuxt:preview` | 纯 Nuxt 预览                            |
+| `pnpm typecheck`    | Nuxt + TypeScript 类型检查              |
+| `pnpm lint`         | ESLint 检查                             |
+| `pnpm lint:fix`     | ESLint 自动修复                         |
+| `pnpm lint:css`     | Stylelint 检查并修复                    |
 
 ### Electron 模式 vs 纯 Nuxt 模式
 
-| 模式 | 环境变量 | 典型命令 |
-|------|----------|----------|
-| Electron | `NUXT_ELECTRON_ENABLED=true` | `pnpm serve` / `pnpm app:dev` |
-| 纯 Nuxt | `NUXT_ELECTRON_ENABLED=false` | `pnpm nuxt:dev` |
+| 模式     | 环境变量                      | 典型命令                      |
+| -------- | ----------------------------- | ----------------------------- |
+| Electron | `NUXT_ELECTRON_ENABLED=true`  | `pnpm serve` / `pnpm app:dev` |
+| 纯 Nuxt  | `NUXT_ELECTRON_ENABLED=false` | `pnpm nuxt:dev`               |
 
 未设置 `NUXT_ELECTRON_ENABLED` 时**默认启用 Electron**。
 
@@ -87,11 +87,11 @@ NUXT_ELECTRON_ENABLED=true pnpm nuxt dev    # Electron
 cp .env.example .env
 ```
 
-| 变量 | 说明 | 默认值 |
-|------|------|--------|
-| `NUXT_ELECTRON_ENABLED` | 是否启用 Electron（`true`/`false`） | `true` |
-| `NUXT_API_HOST` | 后端 API 代理地址（服务端） | `https://php.mmxiaowu.com` |
-| `NUXT_PUBLIC_API_BASE` | 客户端 API 基础路径 | `/api` |
+| 变量                    | 说明                                | 默认值                     |
+| ----------------------- | ----------------------------------- | -------------------------- |
+| `NUXT_ELECTRON_ENABLED` | 是否启用 Electron（`true`/`false`） | `true`                     |
+| `NUXT_API_HOST`         | 后端 API 代理地址（服务端）         | `https://php.mmxiaowu.com` |
+| `NUXT_PUBLIC_API_BASE`  | 客户端 API 基础路径                 | `/api`                     |
 
 客户端可通过 `useRuntimeConfig().public.electronEnabled` 判断当前是否为 Electron 模式。
 
@@ -126,10 +126,10 @@ cp .env.example .env
 
 ### 应用名称
 
-| 场景 | 配置位置 |
-|------|----------|
-| 开发 / 预览 | `src/electron/main.ts` → `APP_NAME` |
-| 打包 | `package.json` → `build.productName` |
+| 场景        | 配置位置                             |
+| ----------- | ------------------------------------ |
+| 开发 / 预览 | `src/electron/main.ts` → `APP_NAME`  |
+| 打包        | `package.json` → `build.productName` |
 
 两处建议保持一致。
 
@@ -160,14 +160,14 @@ pnpm build
 
 ## 示例页面
 
-| 路由 | 说明 |
-|------|------|
-| `/` | 产品展示 |
-| `/cases` | 案例展示 |
-| `/news` | 新闻中心 |
-| `/faqs` | 常见问题 |
+| 路由       | 说明                    |
+| ---------- | ----------------------- |
+| `/`        | 产品展示                |
+| `/cases`   | 案例展示                |
+| `/news`    | 新闻中心                |
+| `/faqs`    | 常见问题                |
 | `/article` | SQLite 文章（增删改查） |
-| `/editor` | Markdown 编辑器 |
+| `/editor`  | Markdown 编辑器         |
 
 ## License
 

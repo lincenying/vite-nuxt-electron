@@ -1,7 +1,7 @@
 import { readValidatedBody } from 'h3'
 import { createComment } from '~~/server/services/comment.service'
-import { commentPostSchema } from '~~/server/utils/schemas'
 import { success } from '~~/server/utils/response'
+import { commentPostSchema } from '~~/server/utils/schemas'
 
 export default defineEventHandler(async (event) => {
     const body = await readValidatedBody(event, commentPostSchema.parse)

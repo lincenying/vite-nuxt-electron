@@ -1,7 +1,7 @@
 import { readValidatedBody } from 'h3'
 import { loginByPassword } from '~~/server/services/user.service'
-import { loginSchema } from '~~/server/utils/schemas'
 import { fail, success } from '~~/server/utils/response'
+import { loginSchema } from '~~/server/utils/schemas'
 
 export default defineEventHandler(async (event) => {
     const body = await readValidatedBody(event, loginSchema.parse)
