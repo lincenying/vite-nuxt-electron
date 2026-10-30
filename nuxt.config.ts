@@ -1,8 +1,33 @@
 import process from 'node:process'
 
+import type { Plugin } from 'vite'
+import { esmShim } from 'vite-plugin-electron/plugin'
+
 // import { viteCss as vite } from './nuxt.config.vite'
 
 import { appDescription } from './src/constants/index'
+
+/**
+ * 预加载脚本固定输出 CJS。
+ * Electron 加载 .js 预加载时会忽略 package.json 的 type=module，ESM 语法无法运行。
+ */
+function forceElectronPreloadCjs(): Plugin {
+    return {
+        name: 'force-electron-preload-cjs',
+        config(config) {
+            const build = config.build ??= {}
+            if (build.lib && typeof build.lib === 'object')
+                build.lib.formats = ['cjs']
+
+            const rolldownOptions = build.rolldownOptions
+            if (rolldownOptions && !Array.isArray(rolldownOptions)) {
+                const output = rolldownOptions.output
+                if (output && !Array.isArray(output))
+                    output.format = 'cjs'
+            }
+        },
+    }
+}
 
 const apiHost = process.env.NUXT_API_HOST || 'https://php.mmxiaowu.com'
 
@@ -191,9 +216,15 @@ export default defineNuxtConfig({
                     build: [
                         {
                             entry: 'src/electron/main.ts',
+                            vite: {
+                                plugins: [esmShim()],
+                            },
                         },
                         {
                             entry: 'src/electron/preload.ts',
+                            vite: {
+                                plugins: [forceElectronPreloadCjs()],
+                            },
                             onstart(options: { reload: () => void }) {
                                 // Notify the renderer process to reload the page when the preload-script is completely loaded
                                 // Instead of restarting the entire electron app

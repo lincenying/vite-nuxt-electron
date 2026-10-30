@@ -1,6 +1,4 @@
-import type { Ref } from 'vue'
 import type { ListPayload } from '#shared/types'
-import type { ApiConfig, Article, ListsData } from '~/types'
 import type { ArticleType } from '~/types/article.types'
 import type { HttpAsyncData } from '~/types/http.types'
 import type { ArticleState } from '~/types/pinia.types'

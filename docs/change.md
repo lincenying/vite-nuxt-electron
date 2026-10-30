@@ -1,3 +1,29 @@
+## 2026-10-30 16:08:09
+
+**改动内容**：在 `package.json` 声明 `"type": "module"`，消除 Node 加载 `nuxt.config.ts` 时的 `MODULE_TYPELESS_PACKAGE_JSON` 警告
+
+- **`package.json`**：增加 `"type": "module"`，让 Node 按 ESM 解析项目配置
+- **`nuxt.config.ts`**：主进程构建加上 `esmShim()`，保证 `__dirname` 在 ESM 产物中可用；预加载脚本强制输出 CJS，避免 Electron 按 CommonJS 加载 `.js` 预加载时失败
+
+**Commit Message**：
+
+```
+fix: 声明 type module 并保持 Electron 预加载为 CJS
+```
+
+## 2026-10-30 16:00:52
+
+**改动内容**：去掉 `src/types/index.ts` 对同名类型的再导出，消除 Nuxt 自动导入重复警告
+
+- **`src/types/index.ts`**：Nuxt 4.6 会扫描 `types/`，桶文件再导出 `ArticleType`、`CasesType`、`CommentTypeEnum` 等会与源文件冲突；仅保留本文件自己的 `Article`、`ListsData`
+- **`src/api/article.ts`**：移除已不再从 `~/types` 引入、且未被使用的类型导入
+
+**Commit Message**：
+
+```
+fix: 去掉 types 桶文件重复导出以消除自动导入警告
+```
+
 ## 2026-09-02 11:43:59
 
 **改动内容**：将 Vite 已弃用的 `server.hmr.port` 迁移为 `server.ws.port`，消除 Vite 8 开发服务器弃用警告
